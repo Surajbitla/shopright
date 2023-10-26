@@ -1,0 +1,45 @@
+/* Profile.css */
+
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: center; */
+    height: 80vh;  /* Adjust based on your needs */
+    font-family: 'Arial', sans-serif;  /* Choose your desired font */
+}
+
+.profile-container h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.profile-option {
+    margin: 10px;
+    font-size: 1.2em;
+}
+
+.profile-option a {
+    text-decoration: none;
+    color: #007BFF;  /* Change color based on your theme */
+    transition: color 0.3s;
+}
+
+.profile-option a:hover {
+    color: #0056b3;  /* Darken color on hover */
+}
+
+.profile-option button {
+    background-color: #007BFF;  /* Change color based on your theme */
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.profile-option button:hover {
+    background-color: #0056b3;  /* Darken color on hover */
+}

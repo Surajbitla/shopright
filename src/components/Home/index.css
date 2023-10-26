@@ -1,0 +1,116 @@
+.title {
+  font-size: 45px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.title > h3 {
+  text-align: center;
+  color: #fff;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+span {
+  color: #f7cc53;
+}
+.button {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+.button a {
+  flex-direction: column;
+  text-decoration: none;
+  border: 2px solid #f7cc53;
+  border-radius: 20px;
+  padding: 20px;
+  text-transform: uppercase;
+  color: #fff;
+  font-weight: bold;
+}
+.button a:hover {
+  background: #f7cc53;
+  transition: 1.2s ease;
+  color: black;
+  border: 2px solid #fff;
+}
+.small-tagline {
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+.small-tagline p {
+  color: #fff;
+  top: 50%;
+  opacity: 0.7;
+  margin-bottom: 30px;
+}
+.social-media {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+.social-media > img {
+  width: 70px;
+}
+  @media (max-width: 640px){
+    .title{
+      font-size: 25px;
+    }
+  }
+/* New Sections CSS */
+
+.section {
+  padding: 60px 0;
+  background-color: #f9f9f9; /* Light gray background */
+  border-bottom: 1px solid #e0e0e0; /* subtle border */
+}
+
+.section:nth-child(even) {
+  background-color: #fff; /* Alternating white background for even sections */
+}
+
+.section-heading {
+  font-size: 28px;
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.section-content {
+  font-size: 18px;
+  color: #666;
+  text-align: center;
+  max-width: 800px; /* Limiting content width for readability */
+  margin: 0 auto; /* Centering the content */
+}
+
+/* Grid Sections CSS */
+
+.sections-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap; /* Allow sections to wrap on smaller screens */
+  gap: 20px; /* Spacing between sections */
+  padding: 40px 5%; /* Padding for breathing room */
+  box-sizing: border-box;
+}
+
+.section {
+  flex: 1; /* Distribute space equally among sections */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  padding: 20px;
+  border: 1px solid #e0e0e0;
+  background-color: #f9f9f9;
+  min-width: calc(25% - 20px); /* Ensure each section takes up at least 25% of the container width minus the gap */
+}
+
+@media (max-width: 768px) {
+  .section {
+    min-width: 100%; /* Make sections full width on smaller screens */
+  }
+}
+

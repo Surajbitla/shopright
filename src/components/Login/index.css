@@ -1,0 +1,117 @@
+.login-container {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-form {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+}
+
+.input-group {
+    margin-bottom: 1.25rem;
+    position: relative;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.input-group input {
+    width: 270px;
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.visibility-toggle {
+    position: absolute;
+    right: 10px;
+    top: 60%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-top: 6px;
+}
+
+.login-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0px 0px 1.0rem
+}
+
+.login-btn {
+    padding: 0.8rem 1.2rem;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;
+    height: 100%;
+}
+
+.login-btn:hover {
+    background-color: #0056b3;
+}
+
+.forgot-password,
+.register-option{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.register-option a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+.forgot-password:hover,
+.register-option a:hover {
+    text-decoration: underline;
+}
+
+.login-background {
+    background:url("../../Assets/images/newbackground.jpeg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 270px;
+    -webkit-clip-path: polygon(100% 0, 100% 81%, 50% 90%, 0 83%, 0 0);
+    clip-path: polygon(100% 0, 100% 81%, 50% 90%, 0 83%, 0 0);
+  }
+  .login-background .title {
+    display: flex;
+    align-items: center;
+    color: white;
+    font-size: 35px;
+    padding: 80px 0px;
+  }
+
+  .welcome{
+    font-style: inherit;
+    font-size: 15px;
+  }
+  .welcome >h2 {
+    margin: 0px 0px 0.75rem
+  }
+
+  .welcome >p {
+    margin: 0px 0px 1.0rem
+  }
+  
+  .forgot-div {
+    display: flex;
+    justify-content: center; 
+    align-items: center;      
+    height: 100%; 
+    margin: 0px 0px 0.75rem           
+}
