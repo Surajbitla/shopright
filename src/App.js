@@ -11,6 +11,7 @@ import EmailNotification from './components/EmailNotification/EmailNotification'
 import ChangePassword from './components/ChangePassword/ChangePassword';
 import Profile from './components/Profile/Profile';
 import ForgotPassword from './components/ForgotPassword/ForgotPassword';
+import CustomerService from './components/CustomerService/CustomerService';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -28,7 +29,8 @@ function App() {
             <Route path="/email-notification" element={<EmailNotification />} />
             <Route path="/change-password" element={<ChangePassword />} />
             <Route path="/profile" element={<Profile />} />
-            <Route path="forgot-password" element={<ForgotPassword />}/>
+            <Route path="/forgot-password" element={<ForgotPassword />}/>
+            <Route path="/customer-service" element={<CustomerService />}/>
             <Route path="*" element={<Error />} />
           </Route>
         </Routes>

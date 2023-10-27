@@ -1,0 +1,95 @@
+.customer-service-container {
+    font-family: 'Arial', sans-serif;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+  }
+  
+  .customer-service-container .contact-section {
+    display: flex;
+    gap: 50px;
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .customer-service-container .block {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .customer-service-container .call-icon, .email-icon {
+    font-size: 32px;
+  }
+  
+  .customer-service-container .call-number, .email-id {
+    font-weight: bold;
+  }
+  
+  .customer-service-container .form-section {
+    width: 60%;
+    background-color: white;
+    padding: 30px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+  
+  .customer-service-container .email-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .customer-service-container .email-form input, .email-form textarea {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    max-width: 100%;
+    max-height: 300px;
+  }
+  
+  .customer-service-container .email-form button {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .customer-service-container .email-form button:hover {
+    background-color: #0056b3;
+  }
+
+  .customer-service-container .form-heading{
+    margin-bottom: 20px;
+  }
+  
+  .customer-service-container .thank-you-section {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .customer-service-container .another-request-btn {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .customer-service-container .another-request-btn:hover {
+    background-color: #0056b3;
+  }

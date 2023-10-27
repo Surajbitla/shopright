@@ -7,21 +7,21 @@
     text-align: center;
 }
 
-.gmail-icon {
+.notification-container .gmail-icon {
     margin-bottom: 20px;
 }
 
-h2 {
+.notification-container .h2 {
     font-size: 24px;
     margin-bottom: 15px;
 }
 
-p {
+.notification-container .p {
     font-size: 18px;
     margin-bottom: 25px;
 }
 
-.back-to-login {
+.notification-container .back-to-login {
     font-size: 16px;
     color: blue;
     text-decoration: underline;
@@ -29,10 +29,10 @@ p {
 }
 
 .gmail-icon img {
-    width: 80px;  /* You can adjust this to your desired width */
-    height: auto; /* This will maintain the aspect ratio */
-    margin: 20px 0;  /* Adds some space above and below the image */
-    display: block;  /* Makes sure the image is centered */
+    width: 80px;  
+    height: auto; 
+    margin: 20px 0;  
+    display: block;  
     margin-left: auto;
     margin-right: auto;
 }
