@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import UserContext from '../../UserContext';
 import { Link, useNavigate  } from 'react-router-dom'; 
 import './Profile.css';
-import Navbar from "../Navbar";
+import Navbar from "../Navbar/Navbar";
 
 
 const Profile = () => {

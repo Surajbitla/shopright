@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './ChangePassword.css';
-import Navbar from "../Navbar";
+import Navbar from "../Navbar/Navbar";
 
 function ChangePassword() {
     const [currentPassword, setCurrentPassword] = useState('');
