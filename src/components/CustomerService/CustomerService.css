@@ -93,3 +93,18 @@
   .customer-service-container .another-request-btn:hover {
     background-color: #0056b3;
   }
+
+  .customer-service-container  .warning-message {
+    color: #d9534f;
+    background-color: #f9d6d5;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  
+  
+  
+  
+  
