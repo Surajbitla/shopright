@@ -12,6 +12,7 @@ import ChangePassword from './components/ChangePassword/ChangePassword';
 import Profile from './components/Profile/Profile';
 import ForgotPassword from './components/ForgotPassword/ForgotPassword';
 import CustomerService from './components/CustomerService/CustomerService';
+import Products from './components/Products/Products';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -26,6 +27,7 @@ function App() {
             <Route path="/home" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup/>} />
+            <Route path="/products" element={<Products/>} />
             <Route path="/email-notification" element={<EmailNotification />} />
             <Route path="/change-password" element={<ChangePassword />} />
             <Route path="/profile" element={<Profile />} />
