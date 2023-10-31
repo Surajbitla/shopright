@@ -3,22 +3,45 @@ import './Login.css';
 import Navbar from "../Navbar/Navbar";
 import { Link, useNavigate  } from 'react-router-dom'; 
 import UserContext from '../../UserContext';
-
-
+import axios from 'axios';
 
 function LoginPage() {
     const navigate = useNavigate();
 
     const [passwordVisible, setPasswordVisible] = useState(false);
     const { setIsLoggedIn } = useContext(UserContext);
+    const [errorMessageLogin, setErrorMessageLogin] = useState("");
 
     const togglePasswordVisibility = () => {
         setPasswordVisible(!passwordVisible);
     };
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault();
-        setIsLoggedIn(true);
-        navigate('/home');
+        const email = e.target.email.value;
+        const password = e.target.password.value;
+        try {
+            const response = await axios.post('http://localhost:5000/login', { email, password });
+            console.log(response);
+            if (response.data.message === 'Logged in successfully') {
+                setIsLoggedIn(true);
+                localStorage.setItem('userEmail', email);
+                if (response.data.isTempPassword) {
+                    navigate('/change-password');
+                } else {
+                    navigate('/home');
+                }
+            }
+        } catch (error) {
+            console.error('Error during login:', error);
+            if (error.response && error.response.data) {
+                // If the server sent a specific error message, use that
+                setErrorMessageLogin(error.response.data);
+            } else {
+                // Otherwise, use the generic error message
+                setErrorMessageLogin('Error during login. Please try again later.');
+            }
+        }
+        
     };
 
 
@@ -48,6 +71,7 @@ function LoginPage() {
                     </button>
                 </div>
                 <div className="forgot-div"><Link to="/forgot-password">Forgot password?</Link></div>
+                {errorMessageLogin && <div className="error-message-login">{errorMessageLogin}</div>}
                 <div className="login-actions">
                     <button type="submit" className="login-btn">Login</button>
                 </div>

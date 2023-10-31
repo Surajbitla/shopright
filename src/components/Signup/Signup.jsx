@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './Signup.css';
 import Navbar from "../Navbar/Navbar";
 import { Link, useNavigate  } from 'react-router-dom'; 
+import axios from 'axios';
 
 function Signup() {
 
@@ -13,6 +14,7 @@ function Signup() {
         email: '',
         phoneNumber: '',
     });
+    const [errorMessageSignup, setErrorMessageSignup] = useState("");
 
     const [errors, setErrors] = useState({});
 
@@ -68,9 +70,20 @@ function Signup() {
         setFormData(prevState => ({ ...prevState, phoneNumber: formattedPhone }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        navigate('/email-notification');  // Use navigate instead of history.push
+        const { firstName, lastName, email, phoneNumber } = formData;
+        console.log(email);
+        try {
+            const response = await axios.post('http://localhost:5000/signup', { firstName, lastName, email, phoneNumber });
+            console.log('Signup response:', response.data);
+            navigate('/email-notification');  // Use navigate instead of history.push
+
+          } catch (error) {
+            console.error('Error signing up:', error);
+            setErrorMessageSignup('Error signing up. Please try again later.');
+          }
+        // sendEmail(email, tempPassword);
     };
 
     const isFormValid = () => {
@@ -109,6 +122,7 @@ function Signup() {
                         <input type="text" name="phoneNumber" id="phoneNumber" value={formData.phoneNumber} onChange={handleInputChange} onBlur={handlePhoneBlur} required />
                         {errors.phoneNumber && <div className="error-message">{errors.phoneNumber}</div>}
                     </div>
+                    {errorMessageSignup && <div className="error-message-signup">{errorMessageSignup}</div>}
                     <div className="signup-actions">
                         <button type="submit" className="signup-btn" disabled={!isFormValid()}>Signup</button>
                     </div>

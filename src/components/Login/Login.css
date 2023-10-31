@@ -115,3 +115,9 @@
     height: 100%; 
     margin: 0px 0px 0.75rem           
 }
+.error-message-login {
+    color: red;
+    margin-top: 10px;
+    text-align: center;
+    margin-bottom: 10px;
+}

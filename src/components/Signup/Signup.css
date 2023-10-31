@@ -118,3 +118,10 @@
 .signup-btn:disabled:hover {
     background-color: #ccc;
 }
+
+.error-message-signup {
+    color: red;
+    margin-top: 10px;
+    text-align: center;
+    margin-bottom: 10px;
+}

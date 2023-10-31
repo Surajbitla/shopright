@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import UserContext from './UserContext';
 import React, { useState } from 'react';
