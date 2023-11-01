@@ -30,9 +30,7 @@ const Navbar = () => {
                                 <Link to="/login">LogIn/SignUp</Link>
                             </li>
                         )}
-            <li>
-              <Link to="/customer-service">Customer Service</Link>
-            </li>
+           
             {/* <li>
               <Link to="/saved-job">Saved Job</Link>
             </li> */}
