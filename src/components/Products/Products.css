@@ -10,7 +10,7 @@
   .filters {
     flex-basis: 20%;
     padding-right: 20px;
-    border-right: 1px solid #ddd;
+    /* border-right: 1px solid #ddd; */
     margin-right: 20px;
   }
   
@@ -36,7 +36,7 @@
   .product img {
     width: 100%;
     height: 200px;
-    object-fit: cover;
+    object-fit: contain;
   }
   
   .product-details {
@@ -59,6 +59,7 @@
     justify-content: center;
     align-items: center;
     margin-top: 20px;
+    margin-bottom: 20px;
   }
   
   .pagination button {
@@ -118,6 +119,7 @@
   .filter-item {
     display: flex;
     flex-direction: column;
+    margin-top: 10px;
   }
   
   .filter-item label {
@@ -136,14 +138,27 @@
   }
   
   .filters-panel {
-    flex-basis: 20%; /* or whatever width you prefer for your filters */
+    flex: 0 0 200px; /* This sets the filter panel to a fixed width of 240px */
+    /* flex-basis: 30%;  */
     border-right: 1px solid #ccc; /* optional */
-    padding-right: 20px; /* optional */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    /* overflow: hidden; */
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.1);
+    transition: box-shadow 0.3s ease-in-out;
+    padding-left: 20px;
+    margin-left: 20px;
+    flex-shrink: 0; /* Prevents the filter panel from shrinking */
+    position: sticky;
+    top: 0; /* Adjust this value if you have a header and you want the filter to start below it */
+    height: calc(100vh - 20px); /* Adjust the height as needed */
+    overflow-y: auto;
   }
   
   .products-main {
     flex-grow: 1;
     padding-left: 20px; /* optional */
+    min-width: 0;
   }
   
   .sorting-controls {
@@ -155,5 +170,117 @@
     margin-bottom: 20px;
   }
 
+
   /* Adjust the pagination and any other elements as needed */
+  /* Products.css */
+.catalog-page {
+    display: flex;
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.products-main {
+    flex-grow: 1;
+    padding-right: 20px;
+}
+
+.sorting-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 20px;
+}
+
+.search-sort-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.search-bar {
+    flex-basis: 80%;
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.sort-by-container {
+    display: flex;
+    align-items: center;
+  }
   
+  .sort-by-container label {
+    margin-right: 10px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .sort-by-container select {
+    padding: 8px 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.3s;
+  }
+  
+  .sort-by-container select:focus {
+    border-color: #4caf50;
+  }
+  
+  .sort-by-container button {
+    padding: 8px 16px;
+    margin-left: 10px;
+    /* background-color: #4caf50; */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(63, 2, 2, 0.279);
+    transition: background-color 0.3s;
+  }
+  
+  .sort-by-container button:hover,
+  .sort-by-container button:focus {
+    background-color: #492482;
+  }
+  
+  .sort-by-container button:active {
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+  }
+  
+  /* Optional: Style for the icon inside the button, if you use one */
+  .sort-by-container button i {
+    margin-right: 5px;
+  }
+  
+
+.product-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.product {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.1);
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+/* ... other styles ... */

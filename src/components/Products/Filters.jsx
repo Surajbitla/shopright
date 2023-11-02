@@ -2,6 +2,8 @@ import React from 'react';
 
 function Filters({ minPrice, maxPrice, onMinPriceChange, onMaxPriceChange }) {
   return (
+    <>
+    <h3 style={{marginTop:'10px',marginBottom:'5px'}}>Filter by:</h3>
     <div className="filters">
       <div className="filter-item">
         <label htmlFor="min-price">Min Price:</label>
@@ -26,6 +28,7 @@ function Filters({ minPrice, maxPrice, onMinPriceChange, onMaxPriceChange }) {
         />
       </div>
     </div>
+    </>
   );
 }
 
