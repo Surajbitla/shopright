@@ -95,7 +95,7 @@ function Products() {
                 <option value="name">Name</option>
               </select>
               <button onClick={toggleSortOrder}>
-                {sortOrder === 'asc' ? '🔼' : '🔽'}
+                {sortOrder === 'asc' ? '▲' : '▼'}
               </button>
             </div>
           </div>

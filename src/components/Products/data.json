@@ -3,181 +3,211 @@
       "id": 1,
       "image": "images/1.jpg",
       "description": "Retractable Car Charger 4 in 1 Fast Car Phone Charger 60W",
-      "price": 22.88
+      "price": 22.88,
+      "rating": 4.5
     },
     {
       "id": 2,
       "image": "images/2.jpg",
       "description": "Portable Charger 38800mAh,LCD Display Power Bank",
-      "price": 34.99
+      "price": 34.99,
+      "rating": 4
     },
     {
       "id": 3,
       "image": "images/3.jpg",
       "description": "Baseus Charging Station 65W PowerCombo, 6 in 1 Power Strip with Retractable USB-C Cable",
-      "price": 69.99
+      "price": 69.99,
+      "rating": 3
     },
     {
       "id": 4,
       "image": "images/4.jpg",
       "description": "1TB USB Flash Drive, Portable High Speed USB",
-      "price": 25.99
+      "price": 25.99,
+      "rating": 5
     },
     {
       "id": 5,
       "image": "images/5.jpg",
       "description": "SAMSUNG Type-C™ USB Flash Drive, 256GB, Transfers 4GB Files in 11 Secs w/Up to 400MB/s 3.13 Read Speeds",
-      "price": 24.99
+      "price": 24.99,
+      "rating": 3.5
     },
     {
       "id": 6,
       "image": "images/6.jpg",
       "description": "Apple AirPods Pro (2nd Generation) Up to 2X More Active Noise Cancelling Bluetooth Headphones, Transparency Mode",
-      "price": 249.99
+      "price": 249.99,
+      "rating": 4.5
     },
     {
       "id": 7,
       "image": "images/7.jpg",
       "description": "Apple AirPods Max Wireless Over-Ear Headphones, Active Noise Cancelling, Transparency Mode, Personalized Spatial Audio, Dolby Atmos",
-      "price": 479.99
+      "price": 479.99,
+      "rating": 4.5
     },
     {
       "id": 8,
       "image": "images/8.jpg",
       "description": "3-Pair Replacement Ear Tips for AirPods Pro & 2nd Generation with Noise Reduction Holewith and Cleaner kit",
-      "price": 8.00
+      "price": 8.00,
+      "rating": 3.5
     },
     {
       "id": 9,
       "image": "images/9.jpg",
       "description": "soundcore by Anker Liberty 4 NC Wireless Earbuds, 98.5% Noise Reduction",
-      "price": 88.00
+      "price": 88.00,
+      "rating": 4
     },
     {
       "id": 10,
       "image": "images/10.jpg",
       "description": "UCOMX Nano 3 in 1 Wireless Charger for iPhone",
-      "price": 29.99
+      "price": 29.99,
+      "rating": 4.5
     },
     {
       "id": 11,
       "image": "images/11.jpg",
       "description": "sisma Travel Electronics Organizer Small Electronic Accessories Carrying Bag",
-      "price": 16.99
+      "price": 16.99,
+      "rating": 4
     },
     {
       "id": 12,
       "image": "images/12.jpg",
       "description": "Bluetooth Speaker with HD Sound, Portable Wireless, IPX5 Waterproof",
-      "price": 26.99
+      "price": 26.99,
+      "rating": 5
     },
     {
       "id": 13,
       "image": "images/13.jpg",
       "description": "BUGANI Bluetooth Speakers, 40W Loud Portable Wireless Bluetooth Speaker AUX for Party Outdoor Camping",
-      "price": 34.99
+      "price": 34.99,
+      "rating": 4.5
     },
     {
       "id": 14,
       "image": "images/14.jpg",
       "description": "Apple Watch SE (2nd Gen) [GPS 40mm] Smartwatch with Midnight Aluminum Case",
-      "price": 249.99
+      "price": 249.99,
+      "rating": 4
     },
     {
       "id": 15,
       "image": "images/15.jpg",
       "description": "Apple Watch Series 5 (GPS + Cellular, 40MM) Gold Aluminum Case with Pink Sport Band",
-      "price": 199.99
+      "price": 199.99,
+      "rating": 4
     },
     {
       "id": 16,
       "image": "images/16.jpg",
       "description": "Apple iPhone 15 (128 GB) – Black",
-      "price": 900.00
+      "price": 900.00,
+      "rating": 4
     },
     {
       "id": 17,
       "image": "images/17.jpg",
       "description": "Apple iPhone 14 Pro, 256GB, Deep Purple",
-      "price": 999.00
+      "price": 999.00,
+      "rating": 5
     },
     {
       "id": 18,
       "image": "images/18.jpg",
       "description": "Apple iPhone 15 Pro (128 GB) - Natural Titanium",
-      "price": 1200.00
+      "price": 1200.00,
+      "rating": 4.5
     },
     {
       "id": 19,
       "image": "images/19.jpg",
       "description": "OnePlus 9 Winter Mist, 5G Unlocked Android Smartphone U.S Version, 8GB RAM+128GB Storage",
-      "price": 405.00
+      "price": 405.00,
+      "rating": 4.9
     },
     {
       "id": 20,
       "image": "images/20.jpg",
       "description": "OnePlus 10T | Moonstone Black | 5G Unlocked Android Smartphone U.S Version | 8GB RAM+128GB Storage",
-      "price": 369.00
+      "price": 369.00,
+      "rating": 4
     },
     {
       "id": 21,
       "image": "images/21.jpg",
       "description": "Apple AirPods (3rd Generation) Wireless Ear Buds",
-      "price": 199.00
+      "price": 199.00,
+      "rating": 5
     },
     {
       "id": 22,
       "image": "images/22.jpg",
       "description": "SanDisk 2TB Extreme Portable SSD",
-      "price": 129.99
+      "price": 129.99,
+      "rating": 5
     },
     {
       "id": 23,
       "image": "images/23.jpg",
       "description": "SAMSUNG SSD T7 Portable External Solid State Drive 1TB, Up to USB 3.2 Gen 2",
-      "price": 94.99
+      "price": 94.99,
+      "rating": 5
     },
     {
       "id": 24,
       "image": "images/24.jpg",
       "description": "SAMSUNG Galaxy Tab S7 FE 12.4” 64GB WiFi Android Tablet",
-      "price": 349.00
+      "price": 349.00,
+      "rating": 4.5
     },
     {
       "id": 25,
       "image": "images/25.jpg",
       "description": "Apple iPad Air (5th Generation): with M1 chip, 10.9-inch",
-      "price": 549.00
+      "price": 549.00,
+      "rating": 4.5
     },
     {
       "id": 26,
       "image": "images/26.jpg",
       "description": "Apple iPad (9th Generation): with A13 Bionic chip, 10.2-inch",
-      "price": 249.00
+      "price": 249.00,
+      "rating": 5
     },
     {
       "id": 27,
       "image": "images/27.jpg",
       "description": "HP x3000 Wireless Mouse, Contoured Comfort, USB Wireless",
-      "price": 8.99
+      "price": 8.99,
+      "rating": 4.5
     },
     {
       "id": 28,
       "image": "images/28.jpg",
       "description": "HP 970 Programmable Wireless Keyboard (Silver) - Bluetooth & 2.4 GHz",
-      "price": 29.99
+      "price": 29.99,
+      "rating": 3.4
     },
     {
       "id": 29,
       "image": "images/29.jpg",
       "description": "havit HV-F2056 15.6\"-17\" Laptop Cooler Cooling Pad",
-      "price": 27.99
+      "price": 27.99,
+      "rating": 4
     },
     {
       "id": 30,
       "image": "images/30.jpg",
       "description": "TECKNET Wireless Mouse, 2.4G Ergonomic Optical Mouse, Computer Mouse for Laptop",
-      "price": 9.99
+      "price": 9.99,
+      "rating": 4
     }
   ]
   

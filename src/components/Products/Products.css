@@ -86,7 +86,7 @@
   }
   
   .pagination button.active {
-    background-color: #4caf50; /* Green background for active page */
+    background-color: #3c3cac; /* Green background for active page */
     color: white;
   }
   .sorting-controls {
@@ -245,7 +245,7 @@
   .sort-by-container button {
     padding: 8px 16px;
     margin-left: 10px;
-    /* background-color: #4caf50; */
+    background-color: #3c3cac;
     color: white;
     border: none;
     border-radius: 4px;
@@ -283,4 +283,101 @@
     transition: box-shadow 0.3s ease-in-out;
 }
 
+.product {
+    /* existing styles */
+    position: relative;
+    /* padding-bottom: 30px;  */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+
+  }
+  
+  .product img {
+    /* existing styles */
+    transition: transform 0.3s ease;
+  }
+  
+  .product:hover img {
+    transform: scale(1.05); /* Image zoom effect on hover */
+  }
+  
+  .product-rating {
+    display: flex;
+    align-items: center;
+  }
+  
+  .star {
+    font-size: 1.5rem; /* Adjust the size of the stars */
+    color: #ddd; /* Default empty star color */
+  }
+  
+  .full-star {
+    color: gold; /* Color for a full star */
+  }
+  
+  .half-star {
+    position: relative;
+  }
+  
+  .half-star:before {
+    content: '★';
+    position: absolute;
+    left: 0;
+    color: gold; /* Color for a full star */
+    width: 50%;
+    overflow: hidden;
+  }
+  
+  .empty-star {
+    color: #ddd; /* Color for an empty star */
+  }
+  
+  .add-to-cart {
+    position: absolute;
+    bottom: 10px;
+    left: 15px;
+    right: 15px;
+    padding: 10px;
+    background-color: #4caf50;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .add-to-cart:hover {
+    background-color: #45a049;
+  }
+  
+  .product-details {
+    padding: 15px;
+    text-align: left;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .product-details p {
+    margin: 0;
+    padding: 5px 0;
+  }
+  
+  .product-details {
+    font-size: 1.1rem;
+    color: #333;
+    margin-bottom: 10px;
+    line-height: 1.4;
+    flex-grow: 1; /* Ensure the description takes up the available space */
+  }
+  
+  .price {
+    font-weight: bold;
+    color: #070707;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+  
+
+  
 /* ... other styles ... */
