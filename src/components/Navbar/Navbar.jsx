@@ -2,6 +2,9 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 import UserContext from '../../UserContext';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+
 
 const Navbar = () => {
   const { isLoggedIn } = useContext(UserContext);
@@ -33,10 +36,12 @@ const Navbar = () => {
              <li>
               <Link to="/customer-service">Customer Service</Link>
             </li>
-           
-            {/* <li>
-              <Link to="/saved-job">Saved Job</Link>
-            </li> */}
+            {/* Shopping Cart Icon */}
+            <li>
+              <Link to="/shopping-cart">
+                <FontAwesomeIcon icon={faShoppingCart} />
+              </Link>
+            </li>
           </ul>
         </nav>
       </div>

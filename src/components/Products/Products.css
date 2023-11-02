@@ -510,4 +510,49 @@
     background-color: #3333ac; /* Darken the color slightly for hover state */
   }  
 
+
+
+/* Add this to your Products.css */
+
+.auto-scroll-container {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+  }
+  
+  .scroll-product-item {
+    min-width: 20%; /* Adjust as necessary for your layout */
+    margin: 0 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .scroll-product-item:hover {
+    transform: translateY(-5px); /* Adds a small lift effect on hover */
+  }
+  
+  .scroll-product-details {
+    padding: 15px;
+    background: #fff;
+    text-align: center;
+  }
+  
+  .scroll-product-details h3 {
+    font-size: 1.2em; /* Larger font size for the title */
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .scroll-product-details p {
+    font-size: 1.2em; /* Larger font size for the price */
+    color: #333;
+    font-weight: bold;
+  }
+  
+  /* This ensures that the auto-scroll products don't overflow the parent container */
+  .products-main {
+    overflow: hidden;
+  }
+  
 /* ... other styles ... */

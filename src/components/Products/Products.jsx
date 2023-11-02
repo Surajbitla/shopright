@@ -5,6 +5,8 @@ import Pagination from './Pagination';
 import './Products.css';
 import productData from './data.json'; // Make sure the path to your JSON file is correct
 import Navbar from "../Navbar/Navbar";
+import AutoScrollProducts from './AutoScrollProducts';
+
 
 function Products() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -66,6 +68,9 @@ function Products() {
   const toggleSortOrder = () => {
     setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
   };
+  
+
+  const topProducts = productData.slice(0, 4); // Assuming you want to rotate through the first 4 products
 
   return (
     <>
@@ -80,6 +85,7 @@ function Products() {
           />
         </aside>
         <main className="products-main">
+            <AutoScrollProducts products={productData} />
           <div className="search-sort-container">
             <div className="search-bar">
               <input
