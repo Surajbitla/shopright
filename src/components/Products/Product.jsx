@@ -1,7 +1,8 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import './Products.css'; // Assuming you have a separate CSS file for Product
 
-function Product({ image, description, price, rating }) {
+function Product({ id, image, description, price, rating }) {
   const imageUrl = `${process.env.PUBLIC_URL}/${image}`;
 
   const renderStars = (rating) => {
@@ -19,6 +20,7 @@ function Product({ image, description, price, rating }) {
   };
 
   return (
+    <Link to={`/product/${id}`} className="product-link" style={{ textDecoration: 'none' }}>
     <div className="product">
       <img src={imageUrl} alt="Product" />
       <div className="product-details">
@@ -29,6 +31,7 @@ function Product({ image, description, price, rating }) {
         <p className="price">${price}</p>
       </div>
     </div>
+    </Link>
   );
 }
 

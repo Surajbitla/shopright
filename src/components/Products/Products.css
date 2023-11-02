@@ -390,4 +390,96 @@
     margin-bottom: 20px;
   }
   
+/*********************************************Product-details******************************************/
+
+  .product-details-container {
+    display: flex;
+    margin: 20px; /* Adds space around the edges */
+    gap: 20px; /* Adds space between image and details sections */
+    padding: 20px 160px; /* Adds 20px padding on top and bottom, 40px on left and right */
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.1);
+  }
+
+  .product-image-section {
+    flex: 0 0 40%; /* Allocates 40% of the container's width to the image section */
+    padding: 20px;
+  }
+
+  .product-details-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover; /* Adjusts the image's display to cover the available space */
+    border-radius: 8px;
+  }
+
+  .product-info-section {
+    flex: 2;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .product-name {
+    font-weight: bold;
+    font-size: 1.5em;
+    margin-bottom: 10px;
+  }
+
+  .product-price {
+    font-size: 1.2em;
+    color: #333;
+    margin-bottom: 20px;
+  }
+
+  .product-quantity {
+    margin-bottom: 20px;
+    /* Style your quantity field here */
+  }
+
+  .add-to-cart-button {
+    padding: 10px 20px;
+    background-color: #45a049;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: background-color 0.3s ease;
+  }
+
+  .add-to-cart-button:hover {
+    background-color: #be3b14;
+  }
+
+  .product-description {
+    font-size: 1em;
+    color: #666;
+    line-height: 1.4;
+    /* If the description is very long you might want to limit the number of lines shown or make the container scrollable */
+    overflow: auto;
+    max-height: 200px; /* Adjust as needed */
+  }
+
+  .quantity-label {
+    font-size: 1rem;
+    margin-right: 10px;
+  }
+  
+  .quantity-input {
+    width: 60px; /* You can adjust the width as necessary */
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .product-quantity {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px; /* Adds some space below the quantity section */
+  }
+
+
 /* ... other styles ... */

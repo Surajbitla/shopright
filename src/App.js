@@ -12,6 +12,8 @@ import Profile from './components/Profile/Profile';
 import ForgotPassword from './components/ForgotPassword/ForgotPassword';
 import CustomerService from './components/CustomerService/CustomerService';
 import Products from './components/Products/Products';
+import ProductDetails from './components/Products/ProductDetails';
+
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -27,6 +29,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup/>} />
             <Route path="/products" element={<Products/>} />
+            <Route path="/product/:id" element={<ProductDetails />} />
             <Route path="/email-notification" element={<EmailNotification />} />
             <Route path="/change-password" element={<ChangePassword />} />
             <Route path="/profile" element={<Profile />} />
