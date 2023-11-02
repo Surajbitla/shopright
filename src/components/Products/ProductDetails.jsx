@@ -8,6 +8,7 @@ function ProductDetails() {
   const [product, setProduct] = useState(null);
   const [error, setError] = useState(null);
   const { id } = useParams(); // This hook allows you to grab the id from the URL
+  const [deliveryPincode, setDeliveryPincode] = useState('');
   const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
@@ -28,6 +29,16 @@ function ProductDetails() {
   const handleQuantityChange = (event) => {
     const newQuantity = Math.max(1, parseInt(event.target.value, 10));
     setQuantity(newQuantity);
+  };
+
+  const handlePincodeChange = (e) => {
+    setDeliveryPincode(e.target.value);
+  };
+
+  const checkDeliveryAvailability = () => {
+    // Logic to check delivery availability
+    console.log('Checking delivery for pincode:', deliveryPincode);
+    // This would typically involve setting some state or alerting the user
   };
 
   if (error) {
@@ -61,6 +72,18 @@ function ProductDetails() {
               min="1" // The minimum quantity should be 1
               step="1" // The steps for the quantity field
             />
+          </div>
+          <div className="delivery-pincode-wrapper">
+            <input
+              type="text"
+              placeholder="Enter delivery pincode"
+              value={deliveryPincode}
+              onChange={handlePincodeChange}
+              className="pincode-input"
+            />
+            <button onClick={checkDeliveryAvailability} className="check-pincode-button">
+              Check
+            </button>
           </div>
         <button className="add-to-cart-button">Add to Cart</button>
         <p className="product-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
