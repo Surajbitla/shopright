@@ -14,6 +14,7 @@ function Products() {
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(1000);
   const [searchTerm, setSearchTerm] = useState('');
+  const noproductsUrl = `${process.env.PUBLIC_URL}/${'images/nodatafound.png'}`;
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
@@ -52,6 +53,7 @@ function Products() {
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
   const currentProducts = sortedProducts.slice(indexOfFirstProduct, indexOfLastProduct);
+  const hasProducts = currentProducts.length > 0;
 
   const totalPages = Math.ceil(sortedProducts.length / productsPerPage);
 
@@ -99,7 +101,11 @@ function Products() {
               </button>
             </div>
           </div>
-          <ProductList products={currentProducts} />
+          {hasProducts ? (
+            <ProductList products={currentProducts} />
+          ) : (
+            <div className="no-products"><img src={noproductsUrl} alt="No products found" /></div>
+          )}
           <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={paginate} />
         </main>
       </div>

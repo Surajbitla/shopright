@@ -378,6 +378,16 @@
     margin-bottom: 10px;
   }
   
-
+  .no-products {
+    text-align: center;
+    margin-top: 50px;
+    padding: 40px;
+    color: #666;
+  }
+  
+  .no-products img {
+    max-width: 50%; /* Adjust as needed */
+    margin-bottom: 20px;
+  }
   
 /* ... other styles ... */
