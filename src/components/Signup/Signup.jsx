@@ -3,6 +3,7 @@ import './Signup.css';
 import Navbar from "../Navbar/Navbar";
 import { Link, useNavigate  } from 'react-router-dom'; 
 import axios from 'axios';
+import config from '../../config';
 
 function Signup() {
 
@@ -75,7 +76,7 @@ function Signup() {
         const { firstName, lastName, email, phoneNumber } = formData;
         console.log(email);
         try {
-            const response = await axios.post('http://localhost:5000/signup', { firstName, lastName, email, phoneNumber });
+            const response = await axios.post(`${config[process.env.NODE_ENV].apiUrl}/signup`, { firstName, lastName, email, phoneNumber });
             console.log('Signup response:', response.data);
             navigate('/email-notification');  // Use navigate instead of history.push
 
