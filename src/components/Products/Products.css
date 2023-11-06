@@ -366,7 +366,7 @@
   .product-details {
     font-size: 1.1rem;
     color: #333;
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
     line-height: 1.4;
     flex-grow: 1; /* Ensure the description takes up the available space */
   }
@@ -458,9 +458,8 @@
     font-size: 1em;
     color: #666;
     line-height: 1.4;
-    /* If the description is very long you might want to limit the number of lines shown or make the container scrollable */
     overflow: auto;
-    max-height: 200px; /* Adjust as needed */
+    max-height: 200px; 
   }
 
   .quantity-label {

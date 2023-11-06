@@ -20,8 +20,9 @@ function Product({ id, image, description, price, rating }) {
   };
 
   return (
-    <Link to={`/product/${id}`} className="product-link" style={{ textDecoration: 'none' }}>
     <div className="product">
+
+    <Link to={`/product/${id}`} className="product-link" style={{ textDecoration: 'none' }}>
       <img src={imageUrl} alt="Product" />
       <div className="product-details">
         <p>{description}</p>
@@ -30,8 +31,9 @@ function Product({ id, image, description, price, rating }) {
         </div>
         <p className="price">${price}</p>
       </div>
-    </div>
     </Link>
+    </div>
+
   );
 }
 
