@@ -4,9 +4,12 @@ import Navbar from "../Navbar/Navbar";
 import { Link, useNavigate  } from 'react-router-dom'; 
 import UserContext from '../../UserContext';
 import axios from 'axios';
+import config from '../../config';
 
 function LoginPage() {
     const navigate = useNavigate();
+    console.log(config); // Log the entire config object
+    console.log(config[process.env.NODE_ENV].apiUrl); // Log the apiUrl property
 
     const [passwordVisible, setPasswordVisible] = useState(false);
     const { setIsLoggedIn } = useContext(UserContext);
@@ -20,7 +23,7 @@ function LoginPage() {
         const email = e.target.email.value;
         const password = e.target.password.value;
         try {
-            const response = await axios.post('http://localhost:5000/login', { email, password });
+            const response = await axios.post(`${config[process.env.NODE_ENV].apiUrl}/login`, { email, password });
             console.log(response);
             if (response.data.message === 'Logged in successfully') {
                 setIsLoggedIn(true);

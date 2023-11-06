@@ -366,7 +366,7 @@
   .product-details {
     font-size: 1.1rem;
     color: #333;
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
     line-height: 1.4;
     flex-grow: 1; /* Ensure the description takes up the available space */
   }
@@ -388,6 +388,170 @@
   .no-products img {
     max-width: 50%; /* Adjust as needed */
     margin-bottom: 20px;
+  }
+  
+/*********************************************Product-details******************************************/
+
+  .product-details-container {
+    display: flex;
+    margin: 20px; /* Adds space around the edges */
+    gap: 20px; /* Adds space between image and details sections */
+    padding: 20px 160px; /* Adds 20px padding on top and bottom, 40px on left and right */
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.1);
+  }
+
+  .product-image-section {
+    flex: 0 0 40%; /* Allocates 40% of the container's width to the image section */
+    padding: 20px;
+  }
+
+  .product-details-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover; /* Adjusts the image's display to cover the available space */
+    border-radius: 8px;
+  }
+
+  .product-info-section {
+    flex: 2;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .product-name {
+    font-weight: bold;
+    font-size: 1.5em;
+    margin-bottom: 10px;
+  }
+
+  .product-price {
+    font-size: 1.2em;
+    color: #333;
+    margin-bottom: 20px;
+  }
+
+  .product-quantity {
+    margin-bottom: 20px;
+    /* Style your quantity field here */
+  }
+
+  .add-to-cart-button {
+    padding: 10px 20px;
+    background-color: #45a049;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: background-color 0.3s ease;
+  }
+
+  .add-to-cart-button:hover {
+    background-color: #be3b14;
+  }
+
+  .product-description {
+    font-size: 1em;
+    color: #666;
+    line-height: 1.4;
+    overflow: auto;
+    max-height: 200px; 
+  }
+
+  .quantity-label {
+    font-size: 1rem;
+    margin-right: 10px;
+  }
+  
+  .quantity-input {
+    width: 80px;
+    height: 40px; /* or any value that suits your design */
+    padding: 0 10px; /* Optional: add some padding inside the input field */
+    font-size: 16px; /* Optional: adjust the font size if necessary */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px; /* Provides spacing between the input field and the button or other elements */
+  }
+  
+  .product-quantity {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px; /* Adds some space below the quantity section */
+  }
+
+  .delivery-pincode-section {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .pincode-input {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+  }
+  
+  .check-pincode-button {
+    padding: 8px 16px;
+    background-color: #3c3cac; /* Or any other color you prefer */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .check-pincode-button:hover {
+    background-color: #3333ac; /* Darken the color slightly for hover state */
+  }  
+
+
+
+/* Add this to your Products.css */
+
+.auto-scroll-container {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+  }
+  
+  .scroll-product-item {
+    min-width: 20%; /* Adjust as necessary for your layout */
+    margin: 0 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .scroll-product-item:hover {
+    transform: translateY(-5px); /* Adds a small lift effect on hover */
+  }
+  
+  .scroll-product-details {
+    padding: 15px;
+    background: #fff;
+    text-align: center;
+  }
+  
+  .scroll-product-details h3 {
+    font-size: 1.2em; /* Larger font size for the title */
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .scroll-product-details p {
+    font-size: 1.2em; /* Larger font size for the price */
+    color: #333;
+    font-weight: bold;
+  }
+  
+  /* This ensures that the auto-scroll products don't overflow the parent container */
+  .products-main {
+    overflow: hidden;
   }
   
 /* ... other styles ... */

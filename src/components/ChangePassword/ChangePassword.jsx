@@ -3,6 +3,7 @@ import './ChangePassword.css';
 import Navbar from "../Navbar/Navbar";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import config from '../../config';
 
 function ChangePassword() {
     const [currentPassword, setCurrentPassword] = useState('');
@@ -38,7 +39,7 @@ function ChangePassword() {
         }
 
         try {
-            const response = await axios.post('http://localhost:5000/change-password', {
+            const response = await axios.post(`${config[process.env.NODE_ENV].apiUrl}/change-password`, {
                 email: email, 
                 currentPassword,
                 newPassword

@@ -5,10 +5,12 @@ import gmailIcon from '../../Assets/images/Gmail-Logo.png';  // Adjust the path 
 
 
 function EmailNotification() {
+    
+    const gmailUrl = `${process.env.PUBLIC_URL}/${'images/Gmail.Logo.png'}`;
     return (
         <div className="notification-container">
             <div className="gmail-icon">
-                <img src={gmailIcon} alt="Gmail Icon" />
+                <img src={gmailUrl} alt="Gmail Icon" />
             </div>
             
             <h2>Email Sent!</h2>
