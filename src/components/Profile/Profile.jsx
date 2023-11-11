@@ -1,19 +1,21 @@
 import React, { useContext } from 'react';
-import UserContext from '../../UserContext';
 import { Link, useNavigate  } from 'react-router-dom'; 
 import './Profile.css';
 import Navbar from "../Navbar/Navbar";
+import UserContext from '../../UserContext';
 
 
 const Profile = () => {
     const navigate = useNavigate();
-
-    const { setIsLoggedIn } = useContext(UserContext);
+    const { setUser, setIsLoggedIn } = useContext(UserContext);
 
     const handleLogout = () => {
-        // Here you can also clear any user-related data or tokens you've stored
-        setIsLoggedIn(false);
+        setUser(null);        // Clear the user state
+        setIsLoggedIn(false); // Update the isLoggedIn state
+        sessionStorage.setItem('userEmail', "");
+        sessionStorage.setItem('user','');
         navigate('/home');
+        window.location.reload();
     };
 
     return (

@@ -3,14 +3,32 @@ import { useParams } from 'react-router-dom';
 import productData from './data.json'; // Ensure this path is correct
 import Navbar from "../Navbar/Navbar";
 import './Products.css';
+import { useCart  } from '../ShoppingCart/CartContext';
 
 function ProductDetails() {
+
+  const [cartMessage, setCartMessage] = useState('');
+  const [isMessageVisible, setIsMessageVisible] = useState(false);
   const [product, setProduct] = useState(null);
   const [error, setError] = useState(null);
   const { id } = useParams(); // This hook allows you to grab the id from the URL
   const [deliveryPincode, setDeliveryPincode] = useState('');
   const [quantity, setQuantity] = useState(1);
+  const { addToCart } = useCart();
 
+  const renderStars = (rating) => {
+    let stars = [];
+    for (let i = 1; i <= 5; i++) {
+      if (i <= rating) {
+        stars.push(<span className="star full-star" key={`full_${i}`}>★</span>);
+      } else if (i - 1 < rating && i > rating) {
+        stars.push(<span className="star half-star" key={`half_${i}`}>★</span>);
+      } else {
+        stars.push(<span className="star empty-star" key={`empty_${i}`}>★</span>);
+      }
+    }
+    return stars;
+  };
   useEffect(() => {
     // This function will be called when the component mounts and whenever the id changes
     const fetchProductDetails = () => {
@@ -40,6 +58,22 @@ function ProductDetails() {
     console.log('Checking delivery for pincode:', deliveryPincode);
     // This would typically involve setting some state or alerting the user
   };
+  const handleAddToCartClick = () => {
+    addToCart(product, quantity);
+    setCartMessage('Product added to cart successfully!');
+    setIsMessageVisible(true);
+  };
+
+  useEffect(() => {
+    let timer;
+    if (isMessageVisible) {
+      timer = setTimeout(() => {
+        setIsMessageVisible(false);
+      }, 3000); // Message will disappear after 3 seconds
+    }
+    return () => clearTimeout(timer); // Cleanup the timer
+  }, [isMessageVisible]);
+
 
   if (error) {
     return <div className="product-error">{error}</div>;
@@ -61,6 +95,9 @@ function ProductDetails() {
       <div className="product-info-section">
         <h2 className="product-name">{product.description}</h2>
         <p className="product-price">${product.price.toFixed(2)}</p>
+        <div className="product-rating">
+          {product.rating && renderStars(product.rating)}
+        </div>
         <div className="product-quantity">
             <label htmlFor="quantity" className="quantity-label">Quantity:</label>
             <input
@@ -85,7 +122,12 @@ function ProductDetails() {
               Check
             </button>
           </div>
-        <button className="add-to-cart-button">Add to Cart</button>
+          <button className="add-to-cart-button" onClick={handleAddToCartClick}>
+          Add to Cart
+        </button>
+        <div className={`cart-message ${isMessageVisible ? 'cart-message-visible' : ''}`}>
+        {cartMessage}
+      </div>
         <p className="product-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
         Vestibulum feugiat mi eget elit elementum, id pulvinar tellus eleifend.
         Integer porttitor elit id euismod elementum. Nulla vel molestie massa, eget iaculis elit. 

@@ -13,14 +13,17 @@ import ForgotPassword from './components/ForgotPassword/ForgotPassword';
 import CustomerService from './components/CustomerService/CustomerService';
 import Products from './components/Products/Products';
 import ProductDetails from './components/Products/ProductDetails';
-
+import ShoppingCart from './components/ShoppingCart/ShoppingCart';
+import { CartProvider } from './components/ShoppingCart/CartContext';
 
 function App() {
+  const [user, setUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
     <>
-    <UserContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
+    <UserContext.Provider value={{ user, setUser, isLoggedIn, setIsLoggedIn }}>
+    <CartProvider>
       <BrowserRouter>
         <Routes>
           <Route path="/">
@@ -35,10 +38,12 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/forgot-password" element={<ForgotPassword />}/>
             <Route path="/customer-service" element={<CustomerService />}/>
+            <Route path="/shopping-cart" element={<ShoppingCart />}/>
             <Route path="*" element={<Error />} />
           </Route>
         </Routes>
       </BrowserRouter>
+      </CartProvider>
     </UserContext.Provider>
     </>
   );

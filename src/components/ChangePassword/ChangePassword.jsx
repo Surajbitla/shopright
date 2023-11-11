@@ -10,12 +10,14 @@ function ChangePassword() {
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState('');
-    const email = localStorage.getItem('userEmail');
+    const email = sessionStorage.getItem('userEmail');
     const navigate = useNavigate();
     const [successMessage, setSuccessMessage] = useState('');
     const [currentPasswordVisible, setCurrentPasswordVisible] = useState(false);
     const [newPasswordVisible, setNewPasswordVisible] = useState(false);
     const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
+    const apiUrl = process.env.NODE_ENV === 'development' ? config.development.apiUrl : config.production.apiUrl;
+
 
     const validatePassword = (password) => {
         const hasUppercase = /[A-Z]/.test(password);
@@ -39,7 +41,7 @@ function ChangePassword() {
         }
 
         try {
-            const response = await axios.post(`${config[process.env.NODE_ENV].apiUrl}/change-password`, {
+            const response = await axios.post(`${apiUrl}/change-password`, {
                 email: email, 
                 currentPassword,
                 newPassword
