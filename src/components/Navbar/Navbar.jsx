@@ -10,6 +10,8 @@ const Navbar = () => {
   const { isLoggedIn } = useContext(UserContext);
   const { cart } = useCart(); // use the useCart hook
   const userEmail = sessionStorage.getItem('userEmail');
+  const localUserData = sessionStorage.getItem('user');
+
   // Function to calculate the total number of items in the cart
   const getTotalItems = (cartItems) => {
     return cartItems.reduce((total, item) => total + item.quantity, 0);
@@ -33,7 +35,7 @@ const Navbar = () => {
             <li>
               <Link to="/products">Products</Link>
             </li>
-            {isLoggedIn || userEmail!=='' ? (
+            {localUserData ? (
               <li>
                 <Link to="/profile">Profile</Link>
               </li>
