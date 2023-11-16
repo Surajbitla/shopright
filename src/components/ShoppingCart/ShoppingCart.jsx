@@ -9,15 +9,18 @@ import { useNavigate } from 'react-router-dom';
 
 const ShoppingCart = () => {
     // Use the useCart hook instead of local state
-    const { cart, removeFromCart, updateQuantity, applyCoupon, clearCart, totalPrice } = useCart();
+    const { cart, removeFromCart, updateQuantity, applyCoupon, clearCart, totalPrice, tax, totalIncludingTax } = useCart();
     const [coupon, setCoupon] = useState('');
+    const localUserData = sessionStorage.getItem('user');
     let navigate = useNavigate();
 
     // Handle coupon input change
     const handleCouponChange = (e) => {
         setCoupon(e.target.value);
     };
-
+    const handleCheckout = () => {
+        navigate('/checkout');
+    };
     // Apply the coupon code
     const handleApplyCoupon = () => {
         applyCoupon(coupon); // Apply coupon logic from context
@@ -37,9 +40,10 @@ const ShoppingCart = () => {
                 <div className="shopping-cart-empty">
                     <h2>Shopping Cart</h2>
                     <p>Your cart is empty!</p>
-                    <button onClick={handleContinueShopping}>CONTINUE SHOPPING</button> 
+                    <button onClick={handleContinueShopping}>CONTINUE SHOPPING</button>
                 </div>
-                <div className="shopping-cart-empty"><button onClick={handleloginaccount}>Sign in to your account</button></div>
+                {localUserData ? '':(
+                <div className="shopping-cart-empty"><button onClick={handleloginaccount}>Sign in to your account</button></div>)}
             </>
         );
     }
@@ -48,58 +52,60 @@ const ShoppingCart = () => {
         <>
             <Navbar />
             <div className="shopping-cart-container">
-            <div className="cart-and-summary">
-            <div className="cart-table">
+                <div className="cart-and-summary">
+                    <div className="cart-table">
 
-                <table>
-                    <thead>
-                        <tr>
-                            <th>PRODUCT</th>
-                            <th>DESCRIPTION</th>
-                            <th>PRICE</th>
-                            <th>QUANTITY</th>
-                            <th>TOTAL</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {cart.map((product) => (
-                            <tr key={product.id}>
-                                <td>
-                                    <img src={product.image} alt={product.name} className="cart-product-image" />
-                                </td>
-                                <td>{product.description}</td>
-                                <td>${product.price.toFixed(2)}</td>
-                                <td>
-                                    <div className="quantity-input">
-                                        <button className="decrement" onClick={() => updateQuantity(product.id, Math.max(1, product.quantity - 1))}>-</button>
-                                        <input
-                                            type="number"
-                                            value={product.quantity}
-                                            onChange={(e) => updateQuantity(product.id, Math.max(1, parseInt(e.target.value, 10)))}
-                                            min="1"
-                                        />
-                                        <button className="increment" onClick={() => updateQuantity(product.id, product.quantity + 1)}>+</button>
-                                    </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>PRODUCT</th>
+                                    <th>DESCRIPTION</th>
+                                    <th>PRICE</th>
+                                    <th>QUANTITY</th>
+                                    <th>TOTAL</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {cart.map((product) => (
+                                    <tr key={product.id}>
+                                        <td>
+                                            <img src={product.image} alt={product.name} className="cart-product-image" />
+                                        </td>
+                                        <td>{product.description}</td>
+                                        <td>${product.price.toFixed(2)}</td>
+                                        <td>
+                                            <div className="quantity-input">
+                                                <button className="decrement" onClick={() => updateQuantity(product.id, Math.max(1, product.quantity - 1))}>-</button>
+                                                <input
+                                                    type="number"
+                                                    value={product.quantity}
+                                                    onChange={(e) => updateQuantity(product.id, Math.max(1, parseInt(e.target.value, 10)))}
+                                                    min="1"
+                                                />
+                                                <button className="increment" onClick={() => updateQuantity(product.id, product.quantity + 1)}>+</button>
+                                            </div>
 
-                                </td>
+                                        </td>
 
-                                <td>${(product.price * product.quantity).toFixed(2)}</td>
-                                <td>
-                                    <button onClick={() => removeFromCart(product.id)}>Remove</button>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
+                                        <td>${(product.price * product.quantity).toFixed(2)}</td>
+                                        <td>
+                                            <button onClick={() => removeFromCart(product.id)}>Remove</button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div className="order-summary">
+                        <h3>Order summary</h3>
+                        <p>Sub total: ${totalPrice.toFixed(2)}</p>
+                        <p>Tax (${tax.toFixed(0)}%): ${tax.toFixed(2)}</p>
+                        <p>Total (Inclusive of tax): ${totalIncludingTax.toFixed(2)}</p>
+                        <button onClick={handleCheckout}>CHECKOUT</button>
+                    </div>
+
                 </div>
-                <div className="order-summary">
-                    <h3>Order summary</h3>
-                    <p>Sub total: ${totalPrice.toFixed(2)}</p>
-                    <p>Total (Inclusive of tax $0.00): ${totalPrice.toFixed(2)}</p>
-                    <button onClick={() => console.log('Proceed to checkout')}>CHECKOUT</button>
-                </div>
-            </div>
                 <div className="coupon-section">
                     <p>Promotion code?</p>
                     <input
@@ -111,7 +117,7 @@ const ShoppingCart = () => {
                     <button onClick={handleApplyCoupon}>Apply</button>
                     <button className="clearCart" onClick={clearCart}>Clear Cart</button>
                 </div>
-                
+
             </div>
         </>
     );

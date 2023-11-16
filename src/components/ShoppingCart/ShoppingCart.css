@@ -65,6 +65,7 @@
 .order-summary {
   margin-top: 20px;
   text-align: right;
+  line-height: 1.6rem;
 }
 .shopping-cart-container .coupon-section input[type="text"] {
   padding: 10px;
@@ -102,7 +103,7 @@
 }
 
 .shopping-cart-container .order-summary p {
-  margin-bottom: 7px;
+  margin-bottom: 10px;
   color: #666;
 
 }

@@ -11,6 +11,14 @@ export const CartProvider = ({ children }) => {
     const [cart, setCart] = useState([]);
     const userEmail = sessionStorage.getItem('userEmail');
     const { user, isLoggedIn, setUser ,setIsLoggedIn} = useContext(UserContext); // Now also getting isLoggedIn from context
+    const TAX_RATE = 0.10; // 10% tax rate, adjust as needed
+    const totalPrice = cart.reduce((acc, curr) => acc + curr.price * curr.quantity, 0);
+
+    // Calculate tax based on subtotal
+    const tax = totalPrice * TAX_RATE;
+
+    // Calculate total price including tax
+    const totalIncludingTax = totalPrice + tax;
     console.log(user);
     const apiUrl = process.env.NODE_ENV === 'development' ? config.development.apiUrl : config.production.apiUrl;
 
@@ -44,7 +52,6 @@ export const CartProvider = ({ children }) => {
       };
 
      
-      const totalPrice = cart.reduce((acc, curr) => acc + curr.price * curr.quantity, 0);
 
       // Function to handle adding items to cart
 const addToCart = (product, quantity) => {
@@ -173,7 +180,7 @@ useEffect(() => {
   };
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart, updateQuantity, applyCoupon, clearCart, totalPrice }}>
+    <CartContext.Provider value={{ cart, addToCart, removeFromCart, updateQuantity, applyCoupon, clearCart, totalPrice, tax, totalIncludingTax }}>
       {children}
     </CartContext.Provider>
   );

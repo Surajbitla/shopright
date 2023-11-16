@@ -1,0 +1,147 @@
+/* Checkout.css */
+
+.checkout-container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+}
+
+.checkout-container h1, .checkout-container h2 {
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.checkout-container h1 {
+    font-size: 1.8rem;
+    text-align: center;
+}
+
+.checkout-container h2 {
+    font-size: 1.4rem;
+}
+
+.checkout-container .shipping-address-section, .checkout-container .payment-method-section {
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.checkout-container p {
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.checkout-right p {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+.checkout-container button {
+    display: inline-block;
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 1rem;
+}
+
+.checkout-container button:hover {
+    background-color: #45a049;
+}
+
+.checkout-container .my-payments-container, .checkout-container .my-addresses-container {
+    margin-top: 20px;
+    background-color: #e8e8e8;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.checkout-container .payment-item, .checkout-container .address-item {
+    background-color: #fff;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.checkout-container .payment-details, .checkout-container .address-details {
+    margin-bottom: 10px;
+}
+
+.checkout-container .default-payment, .checkout-container .primary-address {
+    color: #4CAF50;
+    font-weight: bold;
+}
+
+.checkout-container .payment-actions, .checkout-container .address-actions {
+    text-align: right;
+}
+
+/* Add more styles as needed */
+/* Checkout.css */
+
+.checkout-container {
+    display: flex;
+    justify-content: space-between; /* This will space out the child elements */
+    padding: 20px;
+}
+
+.checkout-left {
+    flex: 2; /* Takes twice the space of the checkout-right */
+    padding: 20px;
+}
+
+.checkout-right {
+    flex: 1; /* Assigns less space to this container compared to checkout-left */
+    padding: 20px;
+    margin-left: 20px; /* Keeps some space between the two sections */
+}
+
+.order-summary {
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.order-summary h3 {
+    margin-bottom: 15px;
+}
+
+.order-summary p, .order-summary h4 {
+    margin-bottom: 10px;
+}
+
+.place-order-button {
+    width: 100%;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 20px; /* Adds margin on top for spacing */
+}
+
+.place-order-button:hover {
+    background-color: #45a049;
+}
+
+
+.product-image-checkout{
+    width: 125px; /* Fixed width */
+    height: 125px; /* Fixed height, make it equal to width for a square or adjust as per your design */
+    border-radius: 4px;
+    object-fit: contain; /* This will cover the area, cropping the image as needed */
+    display: block; /* Ensures the image is a block-level element to fit the container properly */
+}
+/* Add more styles as needed */

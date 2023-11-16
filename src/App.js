@@ -14,6 +14,8 @@ import CustomerService from './components/CustomerService/CustomerService';
 import Products from './components/Products/Products';
 import ProductDetails from './components/Products/ProductDetails';
 import ShoppingCart from './components/ShoppingCart/ShoppingCart';
+import OrderHistory from './components/OrderHistory/OrderHistory';
+import Checkout from './components/Checkout/Checkout';
 import { CartProvider } from './components/ShoppingCart/CartContext';
 
 function App() {
@@ -36,9 +38,11 @@ function App() {
             <Route path="/email-notification" element={<EmailNotification />} />
             <Route path="/change-password" element={<ChangePassword />} />
             <Route path="/profile" element={<Profile />} />
-            <Route path="/forgot-password" element={<ForgotPassword />}/>
-            <Route path="/customer-service" element={<CustomerService />}/>
-            <Route path="/shopping-cart" element={<ShoppingCart />}/>
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/customer-service" element={<CustomerService />} />
+            <Route path="/shopping-cart" element={<ShoppingCart />} />
+            <Route path="/order-history" element={<OrderHistory />} />
+            <Route path="/checkout" element={<Checkout />} />
             <Route path="*" element={<Error />} />
           </Route>
         </Routes>
