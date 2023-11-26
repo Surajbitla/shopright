@@ -100,7 +100,7 @@ const ShoppingCart = () => {
                     <div className="order-summary">
                         <h3>Order summary</h3>
                         <p>Sub total: ${totalPrice.toFixed(2)}</p>
-                        <p>Tax (${tax.toFixed(0)}%): ${tax.toFixed(2)}</p>
+                        <p>Tax (10%): ${tax.toFixed(2)}</p>
                         <p>Total (Inclusive of tax): ${totalIncludingTax.toFixed(2)}</p>
                         <button onClick={handleCheckout}>CHECKOUT</button>
                     </div>
