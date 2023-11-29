@@ -1,84 +1,18 @@
 // OrderHistory.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './OrderHistory.css'; // Make sure to create and import your CSS file
 import Navbar from "../Navbar/Navbar";
+import axios from 'axios';
+import config from '../../config';
 
 const OrderHistory = () => {
-    const orders = [
-        {
-            id: 1,
-            orderNumber: 'Order #12345',
-            productName: 'Product A',
-            productImage: 'images/1.jpg',
-            status: 'Shipped',
-            progress: 50,
-            price: '$29.99',
-            orderedDate: '2023-01-01',
-            processedDate: '2023-01-02',
-            shippedDate: '2023-01-03',
-            outForDeliveryDate: '',
-            deliveredDate: ''
-        },
-        {
-            id: 2,
-            orderNumber: 'Order #12346',
-            productName: 'Product B',
-            productImage: 'images/2.jpg', // Replace with actual image path
-            status: 'Delivered',
-            progress: 100,
-            price: '$19.99',
-            orderedDate: '2023-01-01',
-            processedDate: '2023-01-02',
-            shippedDate: '2023-01-03',
-            outForDeliveryDate: '2023-01-04',
-            deliveredDate: '2023-01-04'
-        },
-        {
-            id: 3,
-            orderNumber: 'Order #12347',
-            productName: 'Product C',
-            productImage: 'images/1.jpg', // Replace with actual image path
-            status: 'Processed',
-            progress: 30,
-            price: '$39.99',
-            orderedDate: '2023-01-01',
-            processedDate: '2023-01-02',
-            shippedDate: '',
-            outForDeliveryDate: '',
-            deliveredDate: ''
-        },
-        {
-            id: 4,
-            orderNumber: 'Order #12348',
-            productName: 'Product D',
-            productImage: 'images/4.jpg', // Replace with actual image path
-            status: 'Processed',
-            progress: 30,
-            price: '$49.99',
-            orderedDate: '2023-01-01',
-            processedDate: '2023-01-02',
-            shippedDate: '',
-            outForDeliveryDate: '',
-            deliveredDate: ''
-        },
-        {
-            id: 5,
-            orderNumber: 'Order #12349',
-            productName: 'Product E',
-            productImage: 'images/5.jpg', // Replace with actual image path
-            status: 'Processed',
-            progress: 30,
-            price: '$24.99',
-            orderedDate: '2023-01-01',
-            processedDate: '2023-01-02',
-            shippedDate: '',
-            outForDeliveryDate: '',
-            deliveredDate: ''
-        },
-        // ... more orders
-    ];
-    const [filteredOrders, setFilteredOrders] = useState(orders);
+
+    const apiUrl = process.env.NODE_ENV === 'development' ? config.development.apiUrl : config.production.apiUrl;
+    const [orders, setOrders] = useState([]);
+    const [filteredOrders, setFilteredOrders] = useState([]);
     const [expandedOrderId, setExpandedOrderId] = useState(null);
+
+    const TAX_RATE = 0.10; // 10% tax rate, adjust as needed
 
     const toggleOrder = (orderId) => {
         if (expandedOrderId === orderId) {
@@ -100,44 +34,81 @@ const OrderHistory = () => {
     };
 
     const handleApplyFilters = () => {
-        let filteredOrders = [...orders];
-
-        // Filter by search text (product name or order number)
+        let filtered = [...orders];
         if (filters.search) {
-            filteredOrders = filteredOrders.filter(order =>
-                order.productName.toLowerCase().includes(filters.search.toLowerCase()) ||
-                order.orderNumber.toLowerCase().includes(filters.search.toLowerCase())
+            filtered = filtered.filter(order =>
+                order.product_name.toLowerCase().includes(filters.search.toLowerCase()) ||
+                `Order #${order.order_id}`.toLowerCase().includes(filters.search.toLowerCase())
             );
         }
-
-        // Filter by date
-        // This assumes you have a 'date' field in your order object in YYYY-MM-DD format
         if (filters.date) {
-            filteredOrders = filteredOrders.filter(order =>
-                order.date === filters.date
-            );
+            filtered = filtered.filter(order => formatDate(order.order_date) === filters.date);
         }
-
-        // Filter by status
         if (filters.status) {
-            filteredOrders = filteredOrders.filter(order =>
-                order.status === filters.status
-            );
+            filtered = filtered.filter(order => order.status === filters.status);
         }
-
-        // Update the orders state to reflect the filtered orders
-        // Assuming you have a state to store the filtered orders
-        setFilteredOrders(filteredOrders);
+        setFilteredOrders(filtered);
     };
 
     const handleClearFilters = () => {
-        setFilters({
-            search: '',
-            date: '',
-            status: '',
-        });
-        setFilteredOrders(orders); // Resetting the filtered orders to the original list
+        setFilters({ search: '', date: '', status: '' });
+        setFilteredOrders(orders);
     };
+
+    const formatDate = (datetime) => {
+        if (!datetime) return '';
+        return datetime.split('T')[0];
+    };
+
+    const getProgressPercentage = (status) => {
+        switch (status) {
+            case 'Ordered':
+                return 3;
+            case 'Processed':
+                return 30;
+            case 'Shipped':
+                return 50;
+            case 'Out for Delivery':
+                return 70;
+            case 'Delivered':
+                return 100;
+            default:
+                return 0;
+        }
+    };
+
+    const getStatusMessage = (status) => {
+        switch (status) {
+            case 'Ordered':
+                return 'Your order has been successfully placed and is now being prepared for processing.';
+            case 'Processed':
+                return 'Great news! Your order has been processed and is getting ready for dispatch.';
+            case 'Shipped':
+                return 'Your order is on the move! It has been shipped and is en route to its destination.';
+            case 'Out for Delivery':
+                return 'Almost there! Your package is out for delivery and will reach you soon.';
+            case 'Delivered':
+                return 'Your order has been delivered. We hope you enjoy your purchase!';
+            default:
+                return 'Your order status is currently being updated. Please check back soon for more details.';
+        }
+    };
+
+    useEffect(() => {
+        const fetchOrders = async () => {
+            try {
+                const userId = JSON.parse(sessionStorage.getItem('user')).id;
+                const response = await axios.get(`${apiUrl}/orders/${userId}`);
+                setOrders(response.data);
+                setFilteredOrders(response.data); // initially, filteredOrders is the same as orders
+            } catch (error) {
+                console.error('Error fetching orders:', error);
+                // Handle error appropriately
+            }
+        };
+
+        fetchOrders();
+    }, []);
 
     return (
         <>
@@ -203,18 +174,21 @@ const OrderHistory = () => {
                 {/* Right section for orders */}
                 <div className="orders-section">
                     {filteredOrders.map((order) => (
-                        <div key={order.id} className={`order-item ${expandedOrderId === order.id ? 'expanded' : ''}`} onClick={() => toggleOrder(order.id)}>
-                            <img src={order.productImage} alt={order.productName} className="product-image" />
+                        <div key={order.order_id} className={`order-item ${expandedOrderId === order.order_id ? 'expanded' : ''}`} onClick={() => toggleOrder(order.order_id)}>
+                            <img src={order.product_image} alt={order.product_name} className="product-image" />
                             <div className="order-details">
-                                <p className="product-name">{order.productName}</p>
+                                <p className="product-name">{order.product_name}</p>
                                 <div className="order-info">
-                                    <span className="order-id">{order.orderNumber}</span>
-                                    <span className="order-price">{order.price}</span>
+                                    <span className="order-id"> Order Number: {order.order_id}</span>
+                                    {/* <span className="order-price"> {(order.price + (order.price * TAX_RATE)).toFixed(2)}</span> */}
+                                    <span className="order-price">Total: ${(parseFloat(order.price * order.quantity) + (parseFloat(order.price * order.quantity) * TAX_RATE)).toFixed(2)}</span>
+
                                 </div>
-                                <div className="status">{order.status}</div>
+                                <div className="status">Quantity: {order.quantity}</div>
+                                <div className="status">Status: {getStatusMessage(order.status)}</div>
                                 <div className="progress-container">
                                     <div className="progress-bar">
-                                        <div className="progress-bar-completed" style={{ width: `${order.progress}%` }}></div>
+                                        <div className="progress-bar-completed" style={{ width: `${getProgressPercentage(order.status)}%` }}></div>
                                     </div>
                                     <div className="progress-stages">
                                         <div className="progress-stage left">Ordered</div>
@@ -224,23 +198,31 @@ const OrderHistory = () => {
                                         <div className="progress-stage right">Delivered</div>
                                     </div>
                                 </div>
-                                {expandedOrderId === order.id && (
-                                    <div className="order-details-flex">
-                                        <div className="status-details">
-                                            <p>Ordered</p>
-                                            <p>Processed</p>
-                                            <p>Shipped</p>
-                                            <p>Out for Delivery</p>
-                                            <p>Delivered</p>
+                                {expandedOrderId === order.order_id && (
+                                    <>
+                                        <div className="order-details-flex">
+                                            <div className="status-details">
+                                                <p>Ordered</p>
+                                                <p>Processed</p>
+                                                <p>Shipped</p>
+                                                <p>Out for Delivery</p>
+                                                <p>Delivered</p>
+                                            </div>
+                                            <div className="date-details">
+                                                <p>{formatDate(order.order_date)}</p>
+                                                <p>{formatDate(order.processed_date)}</p>
+                                                <p>{formatDate(order.shipped_date)}</p>
+                                                <p>{formatDate(order.out_for_delivery_date)}</p>
+                                                <p>{formatDate(order.delivered_date)}</p>
+                                            </div>
+                                            <div className="payment-address-details">
+                                                <div className="payment-details-flex">Tracking Number: {order.order_item_id}</div>
+                                                <div className="payment-details-flex">Payment: {order.card_type} -  {`${order.card_number.slice(0, 4)} **** **** ${order.card_number.slice(-4)}`}</div>
+                                                <div className="address-details-flex">Shipping Address: {order.address_line}, {order.city}, {order.state}, {order.postal_code}</div>
+                                                <div className="address-details-flex">Order Total: {order.total_price}</div>
+                                            </div>
                                         </div>
-                                        <div className="date-details">
-                                            <p>{order.orderedDate}</p>
-                                            <p>{order.processedDate}</p>
-                                            <p>{order.shippedDate}</p>
-                                            <p>{order.outForDeliveryDate}</p>
-                                            <p>{order.deliveredDate}</p>
-                                        </div>
-                                    </div>
+                                    </>
                                 )}
 
                             </div>

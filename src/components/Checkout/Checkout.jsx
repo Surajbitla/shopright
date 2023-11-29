@@ -5,11 +5,14 @@ import MyAddresses from '../Profile/MyAddresses';
 import MyPayments from '../Profile/MyPayments';
 import Navbar from "../Navbar/Navbar";
 import { useCart } from '../ShoppingCart/CartContext';
+import { useNavigate  } from 'react-router-dom'; 
 import axios from 'axios';
 import config from '../../config';
 
 
 const Checkout = () => {
+    const navigate = useNavigate();
+
     const { cart, totalPrice, tax, totalIncludingTax } = useCart(); // Use the hook to get cart details
     const apiUrl = process.env.NODE_ENV === 'development' ? config.development.apiUrl : config.production.apiUrl;
 
@@ -19,6 +22,7 @@ const Checkout = () => {
     const [selectedPayment, setSelectedPayment] = useState(null);
     const [showPaymentList, setShowPaymentList] = useState(false);
 
+    const [showSuccessModal, setShowSuccessModal] = useState(false);
 
     const handleAddressChange = async (address) => {
         // Update the selected address
@@ -70,6 +74,38 @@ const Checkout = () => {
             console.error('Error fetching payments:', error);
         }
     };
+
+    const handlePlaceOrder = async () => {
+        // Determine which address and payment method to use
+        const finalAddress = selectedAddress || defaultAddress;
+        const finalPayment = selectedPayment || defaultPayment;
+    
+        // Ensure both address and payment method are selected or have default values
+        if (!finalAddress || !finalPayment) {
+            alert("Please select both a shipping address and a payment method.");
+            return;
+        }
+    
+        try {
+            const userId = JSON.parse(sessionStorage.getItem('user')).id; 
+            const orderData = {
+                userId,
+                totalPrice: totalIncludingTax,
+                shippingAddressId: finalAddress.address_id, // Use the id of finalAddress
+                paymentMethodId: finalPayment.payment_id  // Use the id of finalPayment
+            };
+    
+            await axios.post(`${apiUrl}/place-order`, orderData);
+            setShowSuccessModal(true);
+            // Handle successful order placement
+        } catch (error) {
+            console.error('Error placing order:', error);
+            // Handle error
+        }
+    };
+    
+    
+    
 
     // useEffect(() => {
     //     // This should be replaced with actual data fetching logic
@@ -127,9 +163,26 @@ const Checkout = () => {
             fetchPaymentsFromDB(userData.id);
         } else {
             // Handle non-logged-in user scenario
-            // You might want to redirect them to login or show a message
         }
     }, []);
+
+    const SuccessModal = () => {
+        const navigateToOrderHistory = () => {
+            setShowSuccessModal(false);
+            navigate('/order-history');
+            window.location.reload();
+        };
+    
+        return (
+            <div className="success-modal-overlay">
+                <div className="success-modal">
+                    <h3>Order Successfully Placed!</h3>
+                    <p>Your order has been placed and is being processed. Thank you for shopping with us.</p>
+                    <button onClick={navigateToOrderHistory}>Okay</button>
+                </div>
+            </div>
+        );
+    };
     
 
     return (
@@ -140,6 +193,7 @@ const Checkout = () => {
                     <h2>Checkout</h2>
                 </div>
             </div>
+            {showSuccessModal && <SuccessModal />}
             <div className="checkout-container">
                 <div className="checkout-left">
                     <div className="shipping-address-section">
@@ -176,10 +230,11 @@ const Checkout = () => {
                         <table>
                             <thead>
                                 <tr>
-                                    <th>PRODUCT</th>
-                                    <th>DESCRIPTION</th>
-                                    <th>PRICE</th>
-                                    <th>TOTAL</th>
+                                    <th>Product</th>
+                                    <th>Description</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Total</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -188,8 +243,9 @@ const Checkout = () => {
                                         <td>
                                             <img src={product.image} alt={product.name} className="product-image-checkout" />
                                         </td>
-                                        <td>{product.description}</td>
+                                        <td style={{lineHeight: '1.4rem'}}>{product.description}</td>
                                         <td>${product.price.toFixed(2)}</td>
+                                        <td>{product.quantity}</td>
                                         <td>${(product.price * product.quantity).toFixed(2)}</td>
                                     </tr>
                                 ))}
@@ -200,11 +256,12 @@ const Checkout = () => {
                 <div className="checkout-right">
                     <div className="order-summary">
                         <h3>Order Summary</h3>
-                        <p>Items: {cart.length}</p>
+                        {/* <p>Items: {cart.length}</p> */}
                         <p>Subtotal: ${totalPrice.toFixed(2)}</p>
                         <p>Tax: ${tax.toFixed(2)}</p>
                         <h4>Total: ${totalIncludingTax.toFixed(2)}</h4>
-                        <button className="place-order-button">Place Order</button>
+                        <button className="place-order-button" onClick={handlePlaceOrder}>Place Order</button>
+
                     </div>
 
                 </div>

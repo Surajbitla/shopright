@@ -123,7 +123,7 @@ const MyDetails = () => {
                         <label>Tips:</label>
                         <ul>
                             <li>Complete your profile for a better experience.</li>
-                            <li>Check out the new features in the settings.</li>
+                            <li>Check out the new features.</li>
                             {/* Add more tips as needed */}
                         </ul>
                     </div>
