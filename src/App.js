@@ -17,6 +17,7 @@ import ShoppingCart from './components/ShoppingCart/ShoppingCart';
 import OrderHistory from './components/OrderHistory/OrderHistory';
 import Checkout from './components/Checkout/Checkout';
 import Maintenance from './components/Maintenance/Maintenance';
+import Admin from './components/Admin/Admin';
 import { CartProvider } from './components/ShoppingCart/CartContext';
 
 
@@ -65,6 +66,7 @@ function App() {
                     <Route path="/shopping-cart" element={<ShoppingCart />} />
                     <Route path="/order-history" element={<OrderHistory />} />
                     <Route path="/checkout" element={<Checkout />} />
+                    <Route path="/admin" element={<Admin />} />
                     <Route path="*" element={<Error />} />
                   </>)}
               </Route>
