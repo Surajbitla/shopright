@@ -174,7 +174,7 @@ const OrderHistory = () => {
                 {/* Right section for orders */}
                 <div className="orders-section">
                     {filteredOrders.map((order) => (
-                        <div key={order.order_id} className={`order-item ${expandedOrderId === order.order_id ? 'expanded' : ''}`} onClick={() => toggleOrder(order.order_id)}>
+                        <div key={`${order.order_id}-${order.order_item_id}`} className={`order-item ${expandedOrderId === order.order_id ? 'expanded' : ''}`} onClick={() => toggleOrder(order.order_id)}>
                             <img src={order.product_image} alt={order.product_name} className="product-image" />
                             <div className="order-details">
                                 <p className="product-name">{order.product_name}</p>
