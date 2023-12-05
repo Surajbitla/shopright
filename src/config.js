@@ -4,7 +4,7 @@ const config = {
     apiUrl: 'http://localhost:5000', // For local development
   },
   production: {
-    apiUrl: 'http://3.85.84.185', // For production
+    apiUrl: 'http://3.85.84.185/api', // For production
   },
 };
 
