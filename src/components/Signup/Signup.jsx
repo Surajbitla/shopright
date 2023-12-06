@@ -80,9 +80,14 @@ function Signup() {
             console.log('Signup response:', response.data);
             navigate('/email-notification');  // Use navigate instead of history.push
 
-          } catch (error) {
+          } catch (error) {            
             console.error('Error signing up:', error);
-            setErrorMessageSignup('Error signing up. Please try again later.');
+            // Check if the error is due to a 409 response
+            if (error.response && error.response.status === 409) {
+                setErrorMessageSignup('User already registered.');
+            } else {
+                setErrorMessageSignup('Error signing up. Please try again later.');
+            }
           }
         // sendEmail(email, tempPassword);
     };
