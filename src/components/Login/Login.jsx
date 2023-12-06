@@ -8,12 +8,14 @@ import config from '../../config';
 
 function LoginPage() {
     const navigate = useNavigate();
+    const apiUrl = process.env.NODE_ENV === 'development' ? config.development.apiUrl : config.production.apiUrl;
+
     console.log(config); // Log the entire config object
     console.log(config[process.env.NODE_ENV].apiUrl); // Log the apiUrl property
 
     const [passwordVisible, setPasswordVisible] = useState(false);
-    const { setIsLoggedIn } = useContext(UserContext);
     const [errorMessageLogin, setErrorMessageLogin] = useState("");
+    const { setUser, setIsLoggedIn } = useContext(UserContext);
 
     const togglePasswordVisibility = () => {
         setPasswordVisible(!passwordVisible);
@@ -23,11 +25,18 @@ function LoginPage() {
         const email = e.target.email.value;
         const password = e.target.password.value;
         try {
-            const response = await axios.post(`${config[process.env.NODE_ENV].apiUrl}/login`, { email, password });
-            console.log(response);
+            const response = await axios.post(`${apiUrl}/login`, { email, password });
             if (response.data.message === 'Logged in successfully') {
+                if (response.data.user) {
+                    setUser(response.data.user);
+                    sessionStorage.setItem('user', JSON.stringify(response.data.user));
+
+
+                } else {
+                    console.error('No user object in response');
+                }
                 setIsLoggedIn(true);
-                localStorage.setItem('userEmail', email);
+                sessionStorage.setItem('userEmail', email);
                 if (response.data.isTempPassword) {
                     navigate('/change-password');
                 } else {

@@ -431,11 +431,11 @@
   .product-price {
     font-size: 1.2em;
     color: #333;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
   }
 
   .product-quantity {
-    margin-bottom: 20px;
+    margin-bottom: 5px;
     /* Style your quantity field here */
   }
 
@@ -480,7 +480,7 @@
   .product-quantity {
     display: flex;
     align-items: center;
-    margin-bottom: 20px; /* Adds some space below the quantity section */
+    margin-bottom: 5px; /* Adds some space below the quantity section */
   }
 
   .delivery-pincode-section {
@@ -554,4 +554,90 @@
     overflow: hidden;
   }
   
+  .cart-message {
+    position: fixed;
+    top: 70px;
+    right: 20px;
+    color: #ffffff;
+    background: #5cb85c; /* Bootstrap success color */
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000; /* Ensure it's above other items */
+    transition: transform 0.3s, opacity 0.3s;
+    transform: translateX(100%); /* Start off the screen */
+    opacity: 0;
+  }
+  
+  /* When visible, use this class to slide in */
+  .cart-message-visible {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  
+  /* Delivery pincode wrapper styles */
+.delivery-pincode-wrapper {
+  align-items: left; /* Aligns the input and button vertically */
+  padding: 5px;
+  border-radius: 5px; /* Rounded corners */
+  max-width: 350px; /* Maximum width of the wrapper */
+  margin-bottom: 10px;
+}
+
+/* Pincode input field styles */
+.pincode-input {
+  flex-grow: 1; /* Takes up available space */
+  padding: 10px;
+  border: 1px solid ; /* Transparent border to maintain the layout when focused */
+  border-radius: 5px 0 0 5px; /* Rounded corners on the left side */
+  outline: none; /* Removes the outline */
+}
+
+/* Input field focus state */
+.pincode-input:focus {
+  border-color: #007bff; /* Blue border when focused */
+  background: #e7f0ff; /* Light blue background when focused */
+}
+
+/* Check pincode button styles */
+.check-pincode-button {
+  padding: 10px 15px;
+  border: none; /* Removes the border */
+  background-color: #007bff; /* Blue background */
+  color: white; /* White text */
+  border-radius: 0 5px 5px 0; /* Rounded corners on the right side */
+  cursor: pointer; /* Cursor changes to pointer to indicate button */
+  outline: none; /* Removes the outline */
+  transition: background-color 0.2s, box-shadow 0.2s; /* Smooth transition for background color and shadow */
+}
+
+/* Button hover state */
+.check-pincode-button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Shadow effect for depth */
+}
+
+/* Button focus state */
+.check-pincode-button:focus {
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5); /* Blue glow effect when focused */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .delivery-pincode-wrapper {
+    flex-direction: column; /* Stack input and button on smaller screens */
+  }
+
+  .pincode-input,
+  .check-pincode-button {
+    width: 100%; /* Full width on smaller screens */
+    border-radius: 5px; /* Rounded corners for both */
+    margin-bottom: 5px; /* Space between input and button */
+  }
+
+  .check-pincode-button {
+    margin-bottom: 0; /* No bottom margin for the last element */
+  }
+}
+
 /* ... other styles ... */

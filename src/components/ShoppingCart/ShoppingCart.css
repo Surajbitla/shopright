@@ -1,0 +1,320 @@
+/* ShoppingCart.css */
+
+/* Base styles */
+
+/* Container */
+.shopping-cart-container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 40px auto;
+  background: #fff;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Header */
+.shopping-cart-container h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+/* Empty cart */
+.shopping-cart-empty {
+  text-align: center;
+  padding: 50px;
+  color: #888;
+}
+
+/* Table styles */
+.shopping-cart-container table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.shopping-cart-container th, td {
+  text-align: left;
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+}
+
+.shopping-cart-container th {
+  background-color: #fff;
+  color: #333;
+  font-weight: bold;
+}
+
+.shopping-cart-container tr:hover {
+  background-color: #f1f1f1;
+}
+
+.shopping-cart-container .cart-product-image {
+  width: 125px; /* Fixed width */
+  height: 125px; /* Fixed height, make it equal to width for a square or adjust as per your design */
+  border-radius: 4px;
+  object-fit: contain; /* This will cover the area, cropping the image as needed */
+  display: block; /* Ensures the image is a block-level element to fit the container properly */
+}
+/* Coupon and order summary */
+.shopping-cart-container .coupon-section{
+  margin-top: 20px;
+  text-align: left;
+}
+.shopping-cart-container,
+.order-summary {
+  margin-top: 20px;
+  text-align: right;
+  line-height: 1.6rem;
+}
+.shopping-cart-container .coupon-section input[type="text"] {
+  padding: 10px;
+  margin-right: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 200px;
+}
+
+/* Buttons */
+.shopping-cart-container button {
+  background-color: #5cb85c;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.shopping-cart-container button:hover {
+  background-color: #4cae4c;
+}
+
+/* Order summary */
+.shopping-cart-container .order-summary {
+  padding-top: 10px;
+  border-top: 1px solid #ddd;
+}
+
+.shopping-cart-container .order-summary h3 {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.shopping-cart-container .order-summary p {
+  margin-bottom: 10px;
+  color: #666;
+
+}
+
+/* Responsive table */
+@media screen and (max-width: 768px) {
+  .shopping-cart-container {
+    width: 100%;
+  }
+
+  .cart-product-image {
+    width: 50px;
+  }
+}
+
+
+/* ShoppingCart.css */
+
+/* ... Other styles ... */
+
+/* Quantity input and buttons container */
+.quantity-input {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* This will center the buttons and input */
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  overflow: hidden; /* Ensures the content doesn't overflow */
+}
+
+.quantity-input button {
+  background-color: #ccc;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  user-select: none; /* Prevents text selection */
+}
+
+.quantity-input button:hover {
+  background-color: #e2e2e2;
+}
+
+.quantity-input input {
+  width: 40px; /* Adjust width as needed */
+  padding: 8px;
+  text-align: center;
+  border: none; /* Removing the border */
+  outline: none;
+}
+
+/* Fix for Firefox */
+.quantity-input input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+/* Fix for Webkit browsers like Chrome and Safari */
+.quantity-input input::-webkit-outer-spin-button,
+.quantity-input input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.quantity-input input:focus {
+  border-color: #943838;
+}
+
+.quantity-input button.decrement,
+.quantity-input button.increment {
+  flex: none; /* Prevent buttons from stretching */
+}
+
+/* Adjust table column widths */
+.shopping-cart-container th.product-name {
+  width: 20%; /* Adjust as necessary */
+}
+
+.shopping-cart-container th.product-price,
+.shopping-cart-container th.product-quantity,
+.shopping-cart-container th.product-total {
+  width: 15%; /* Adjust as necessary */
+}
+
+.shopping-cart-container th.product-remove {
+  width: 10%; /* Adjust as necessary */
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+  .quantity-input input {
+    width: 35px; /* Smaller width on smaller screens */
+  }
+}
+
+/* ShoppingCart.css */
+
+/* Base styles */
+.shopping-cart-container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 40px auto;
+  background: #fff;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Flex container for cart and summary */
+.cart-and-summary {
+  display: flex;
+  justify-content: space-between; /* This will place space between the cart table and the summary */
+}
+
+/* Cart table styles */
+.cart-table {
+  flex-grow: 1; /* This allows the cart table to grow and fill the space */
+  margin-right: 20px; /* This adds some space between the table and the order summary */
+}
+
+/* Order summary styles */
+.order-summary {
+  position: sticky; /* Sticky position */
+  top: 20px; /* Adjust the top position as needed */
+  width: 300px; /* Adjust the width of the summary as needed */
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #fff;
+  align-self: flex-start; /* Aligns the summary to the top */
+}
+
+/* ... Other styles ... */
+
+/* Responsive adjustments */
+@media screen and (max-width: 1024px) {
+  .cart-and-summary {
+    flex-direction: column; /* Stack them on top of each other on smaller screens */
+  }
+
+  .order-summary {
+    width: auto; /* Let the summary take the full width on smaller screens */
+    margin-top: 20px; /* Add some space between the cart table and summary on smaller screens */
+  }
+}
+
+/* Table row styles */
+.shopping-cart-container tr {
+  transition: box-shadow 0.3s ease; /* Smooth transition for the shadow */
+}
+
+/* Hover effect for table rows */
+.shopping-cart-container tr:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Horizontal offset, vertical offset, blur radius, color */
+  z-index: 1; /* Ensure the shadow appears above other elements */
+  position: relative; /* Required for z-index to take effect */
+  background-color: #f9f9f9; /* Optional: change background color on hover */
+}
+
+.shopping-cart-empty {
+  text-align: center;
+  padding: 50px;
+  color: #888;
+  border-radius: 8px;
+}
+
+.shopping-cart-empty:hover {
+  transform: translateY(-5px);
+}
+
+.shopping-cart-empty h2 {
+  color: #333;
+  margin-bottom: 20px;
+  font-size: 2em;
+}
+
+.shopping-cart-empty p {
+  font-size: 1.2em;
+  margin-bottom: 30px;
+}
+
+.shopping-cart-empty button {
+  background-color: #5cb85c;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: bold;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.shopping-cart-empty button:hover {
+  background-color: #4cae4c;
+}
+
+
+.shopping-cart-container .clearCart{
+  background-color: #5cb85c;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  margin-left: 41%;
+}
+
+.shopping-cart-container .clearCart:hover {
+  background-color: #be3b14;
+}
+
+/* ... More responsive styles as needed ... */
+
+/* ... Other responsive styles ... */

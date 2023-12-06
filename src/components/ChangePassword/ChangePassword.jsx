@@ -10,12 +10,19 @@ function ChangePassword() {
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState('');
-    const email = localStorage.getItem('userEmail');
+    const email = sessionStorage.getItem('userEmail');
     const navigate = useNavigate();
     const [successMessage, setSuccessMessage] = useState('');
     const [currentPasswordVisible, setCurrentPasswordVisible] = useState(false);
     const [newPasswordVisible, setNewPasswordVisible] = useState(false);
     const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
+    const apiUrl = process.env.NODE_ENV === 'development' ? config.development.apiUrl : config.production.apiUrl;
+
+    // Toggle functions
+    const toggleCurrentPasswordVisibility = () => setCurrentPasswordVisible(!currentPasswordVisible);
+    const toggleNewPasswordVisibility = () => setNewPasswordVisible(!newPasswordVisible);
+    const toggleConfirmPasswordVisibility = () => setConfirmPasswordVisible(!confirmPasswordVisible);
+
 
     const validatePassword = (password) => {
         const hasUppercase = /[A-Z]/.test(password);
@@ -39,7 +46,7 @@ function ChangePassword() {
         }
 
         try {
-            const response = await axios.post(`${config[process.env.NODE_ENV].apiUrl}/change-password`, {
+            const response = await axios.post(`${apiUrl}/change-password`, {
                 email: email, 
                 currentPassword,
                 newPassword
@@ -81,19 +88,28 @@ function ChangePassword() {
                 <li>Requirement for at least one special character</li>
             </ul>
             <form onSubmit={handleSubmit}>
-                <div>
+                <div className="input-group">
                     <label>Current Password:</label>
-                    <input type="password" value={currentPassword} onChange={(e) => setCurrentPassword(e.target.value)} />
+                    <input type={currentPasswordVisible ? "text" : "password"} value={currentPassword} onChange={(e) => setCurrentPassword(e.target.value)} />
+                    <button type="button" onClick={toggleCurrentPasswordVisibility} className="visibility-toggle">
+                        {currentPasswordVisible ? "Hide" : "Show"}
+                    </button>
                 </div>
-                <div>
+                <div className="input-group">
                     <label>New Password:</label>
-                    <input type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} />
+                    <input type={newPasswordVisible ? "text" : "password"} value={newPassword} onChange={(e) => setNewPassword(e.target.value)} />
+                    <button type="button" onClick={toggleNewPasswordVisibility} className="visibility-toggle">
+                        {newPasswordVisible ? "Hide" : "Show"}
+                    </button>
                 </div>
-                <div>
+                <div className="input-group">
                     <label>Confirm New Password:</label>
-                    <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+                    <input type={confirmPasswordVisible ? "text" : "password"} value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+                    <button type="button" onClick={toggleConfirmPasswordVisibility} className="visibility-toggle">
+                        {confirmPasswordVisible ? "Hide" : "Show"}
+                    </button>
                 </div>
-                {error && <div style={{color: 'red'}}>{error}</div>}
+                {error && <div style={{color: 'red'}}>{error}</div>}    
                 <button type="submit" className="submit-btn">Change Password</button>
             </form>
             {successMessage && <div className="success-message show" >{successMessage}</div>}

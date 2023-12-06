@@ -8,7 +8,7 @@ import config from '../../config';
 function Signup() {
 
     const navigate = useNavigate();
-
+    const apiUrl = process.env.NODE_ENV === 'development' ? config.development.apiUrl : config.production.apiUrl;
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -76,7 +76,7 @@ function Signup() {
         const { firstName, lastName, email, phoneNumber } = formData;
         console.log(email);
         try {
-            const response = await axios.post(`${config[process.env.NODE_ENV].apiUrl}/signup`, { firstName, lastName, email, phoneNumber });
+            const response = await axios.post(`${apiUrl}/signup`, { firstName, lastName, email, phoneNumber });
             console.log('Signup response:', response.data);
             navigate('/email-notification');  // Use navigate instead of history.push
 

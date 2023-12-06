@@ -43,3 +43,46 @@
 .profile-option button:hover {
     background-color: #0056b3;  /* Darken color on hover */
 }
+
+/* Profile.css */
+/* Profile.css */
+.profile-layout {
+    display: flex;
+    margin: 20px;
+}
+
+.profile-sidebar {
+    flex: 0 0 250px; /* Fixed width for the sidebar */
+    padding: 20px;
+    background-color: #3e39ac; /* Adding a distinct background color */
+    color: #fff; /* Light text color for contrast */
+    border-radius: 8px; /* Rounded corners for a modern look */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+    display: flex;
+    flex-direction: column;
+    min-height: 300px;
+}
+
+.profile-sidebar a {
+    color: #fff;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    text-decoration: none;
+    font-size: 1.1em;
+    border-radius: 5px; /* Rounded corners for links */
+    transition: background-color 0.3s, transform 0.2s; /* Smooth transition for hover effects */
+}
+
+.profile-sidebar a:hover {
+    background-color: #f7cc53; /* Highlight color on hover */
+    transform: translateX(5px); /* Slight right shift on hover for a dynamic effect */
+}
+
+.profile-content {
+    flex: 3;
+    padding: 20px;
+    background-color: #fff; /* Light background for the content area */
+    border-radius: 8px; /* Consistent rounded corners */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Consistent shadow */
+    margin-left: 20px; /* Space between sidebar and content */
+}
