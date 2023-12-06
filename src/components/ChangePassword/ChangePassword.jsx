@@ -88,21 +88,21 @@ function ChangePassword() {
                 <li>Requirement for at least one special character</li>
             </ul>
             <form onSubmit={handleSubmit}>
-                <div className="input-group">
+                <div className="change-pass-input-group">
                     <label>Current Password:</label>
                     <input type={currentPasswordVisible ? "text" : "password"} value={currentPassword} onChange={(e) => setCurrentPassword(e.target.value)} />
                     <button type="button" onClick={toggleCurrentPasswordVisibility} className="visibility-toggle">
                         {currentPasswordVisible ? "Hide" : "Show"}
                     </button>
                 </div>
-                <div className="input-group">
+                <div className="change-pass-input-group">
                     <label>New Password:</label>
                     <input type={newPasswordVisible ? "text" : "password"} value={newPassword} onChange={(e) => setNewPassword(e.target.value)} />
                     <button type="button" onClick={toggleNewPasswordVisibility} className="visibility-toggle">
                         {newPasswordVisible ? "Hide" : "Show"}
                     </button>
                 </div>
-                <div className="input-group">
+                <div className="change-pass-input-group">
                     <label>Confirm New Password:</label>
                     <input type={confirmPasswordVisible ? "text" : "password"} value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
                     <button type="button" onClick={toggleConfirmPasswordVisibility} className="visibility-toggle">
