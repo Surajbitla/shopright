@@ -107,6 +107,11 @@ const Admin = () => {
                     <option value="Shipped">Shipped</option>
                     <option value="Out for Delivery">Out for Delivery</option>
                     <option value="Delivered">Delivered</option>
+                    <option value="Initiated">Initiated</option>
+                    <option value="Picked Up">Picked Up</option>
+                    <option value="Received">Received</option>
+                    <option value="Refund Issued">Refund Issued</option>
+                    <option value="Refund Credited">Refund Credited</option>
                 </select>
             </div>
             <div>
@@ -118,6 +123,14 @@ const Admin = () => {
                 <input type="date" name="out_for_delivery_date" value={dateFields.out_for_delivery_date} onChange={handleDateChange} />
                 <label>Delivered Date: </label>
                 <input type="date" name="delivered_date" value={dateFields.delivered_date} onChange={handleDateChange} />
+                <label>Picked Up Date: </label>
+                <input type="date" name="picked_up_date" value={dateFields.picked_up_date} onChange={handleDateChange} />
+                <label>Received Date: </label>
+                <input type="date" name="received_date" value={dateFields.received_date} onChange={handleDateChange} />
+                <label>Refund Issued Date: </label>
+                <input type="date" name="refund_issued_date" value={dateFields.refund_issued_date} onChange={handleDateChange} />
+                <label>Refund Credited Date: </label>
+                <input type="date" name="refund_credited_date" value={dateFields.refund_credited_date} onChange={handleDateChange} />
             </div>
             <button onClick={handleUpdateOrderItem}>Update Order Item</button>
         </div>
