@@ -268,7 +268,7 @@ const OrderHistory = () => {
                             <option value="Out for Delivery">Out for Delivery</option>
                             <option value="Delivered">Delivered</option>
                             <option value="Cancelled Before Delivery">Cancelled</option>
-                            <option value="Cancelled After Delivery">Return/Refund</option>
+                            <option value="Cancelled After Delivery">Returned</option>
 
                         </select>
                     </div>
