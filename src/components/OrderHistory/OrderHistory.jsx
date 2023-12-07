@@ -179,7 +179,12 @@ const OrderHistory = () => {
         return (
             <div className="modal-overlay">
                 <div className="modal">
-                    <h3>Cancel Order</h3>
+                    {(['Ordered', 'Processed', 'Shipped'].includes(selectedOrderForCancellation.status)) && (
+                        <h3>Cancel Order</h3>
+                    )}
+                    {(['Out for Delivery', 'Delivered'].includes(selectedOrderForCancellation.status)) && (
+                        <h3>Return Order</h3>
+                    )}
                     <p>Current Status: {orderStatus}</p>
                     <select value={cancelReason} onChange={(e) => setCancelReason(e.target.value)}>
                         <option value="">Select a reason</option>
@@ -200,7 +205,13 @@ const OrderHistory = () => {
                     <p>{cancellationMessage}</p>
                     <p>Total Refund: ${(parseFloat(selectedOrderForCancellation.price * selectedOrderForCancellation.quantity) + (parseFloat(selectedOrderForCancellation.price * selectedOrderForCancellation.quantity) * TAX_RATE)).toFixed(2)}</p>
                     <p>Refund will be processed to: {selectedOrderForCancellation.card_type} ending in {selectedOrderForCancellation.card_number.substr(-4)}</p>
-                    <button onClick={cancelOrderItem}>Confirm Cancellation</button>
+                    {(['Ordered', 'Processed', 'Shipped'].includes(selectedOrderForCancellation.status)) && (
+                        <button onClick={cancelOrderItem}>Confirm Cancellation</button>
+                    )}
+
+                    {(['Out for Delivery', 'Delivered'].includes(selectedOrderForCancellation.status)) && (
+                        <button onClick={cancelOrderItem}>Confirm Return</button>
+                    )}
                     <button onClick={() => setShowCancelModal(false)}>Close</button>
                 </div>
             </div>
@@ -288,7 +299,15 @@ const OrderHistory = () => {
                                     <div className="order-info">
                                         <div className="status">Status: {getStatusMessage(order.status)}</div>
                                         {!(order.status === 'Cancelled After Delivery' || order.status === 'Cancelled Before Delivery') && (
-                                            <button className="cancel-button-order-history" onClick={() => handleCancelClick(order)}>Cancel Order</button>
+                                            <>
+                                                {(['Ordered', 'Processed', 'Shipped'].includes(order.status)) && (
+                                                    <button className="cancel-button-order-history" onClick={() => handleCancelClick(order)}>Cancel Order</button>
+                                                )}
+
+                                                {(['Out for Delivery', 'Delivered'].includes(order.status)) && (
+                                                    <button className="cancel-button-order-history" onClick={() => handleCancelClick(order)}>Return Order</button>
+                                                )}
+                                            </>
                                         )}
                                     </div>
                                     {(order.status === 'Cancelled After Delivery' || order.status === 'Cancelled Before Delivery') ? '' : (
