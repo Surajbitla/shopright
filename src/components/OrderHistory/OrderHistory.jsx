@@ -11,7 +11,7 @@ const OrderHistory = () => {
     const [orders, setOrders] = useState([]);
     const [filteredOrders, setFilteredOrders] = useState([]);
     const [expandedOrderId, setExpandedOrderId] = useState(null);
-    const hasOrders = filteredOrders.length>0;
+    const hasOrders = filteredOrders.length > 0;
     const noordersUrl = `${process.env.PUBLIC_URL}/${'images/noorders.jpg'}`;
 
 
@@ -166,10 +166,25 @@ const OrderHistory = () => {
             default:
                 cancellationMessage = 'There was an issue with cancelling your order. Please contact customer service.';
         }
+
+        const [localCustomReason, setLocalCustomReason] = useState('');
+
+        const handleTextareaChange = (e) => {
+            setLocalCustomReason(e.target.value);
+        };
+
+        const handleTextareaBlur = () => {
+            setCustomCancelReason(localCustomReason);
+        };
         return (
             <div className="modal-overlay">
                 <div className="modal">
-                    <h3>Cancel Order</h3>
+                    {(['Ordered', 'Processed', 'Shipped'].includes(selectedOrderForCancellation.status)) && (
+                        <h3>Cancel Order</h3>
+                    )}
+                    {(['Out for Delivery', 'Delivered'].includes(selectedOrderForCancellation.status)) && (
+                        <h3>Return Order</h3>
+                    )}
                     <p>Current Status: {orderStatus}</p>
                     <select value={cancelReason} onChange={(e) => setCancelReason(e.target.value)}>
                         <option value="">Select a reason</option>
@@ -181,15 +196,22 @@ const OrderHistory = () => {
                     </select>
                     {cancelReason === 'Other' && (
                         <textarea
-                            // value={customCancelReason}
-                            // onChange={(e) => setCustomCancelReason(e.target.value)}
+                            value={localCustomReason}
+                            onChange={handleTextareaChange}
+                            onBlur={handleTextareaBlur}
                             placeholder="Please specify your reason"
                         ></textarea>
                     )}
                     <p>{cancellationMessage}</p>
                     <p>Total Refund: ${(parseFloat(selectedOrderForCancellation.price * selectedOrderForCancellation.quantity) + (parseFloat(selectedOrderForCancellation.price * selectedOrderForCancellation.quantity) * TAX_RATE)).toFixed(2)}</p>
                     <p>Refund will be processed to: {selectedOrderForCancellation.card_type} ending in {selectedOrderForCancellation.card_number.substr(-4)}</p>
-                    <button onClick={cancelOrderItem}>Confirm Cancellation</button>
+                    {(['Ordered', 'Processed', 'Shipped'].includes(selectedOrderForCancellation.status)) && (
+                        <button onClick={cancelOrderItem}>Confirm Cancellation</button>
+                    )}
+
+                    {(['Out for Delivery', 'Delivered'].includes(selectedOrderForCancellation.status)) && (
+                        <button onClick={cancelOrderItem}>Confirm Return</button>
+                    )}
                     <button onClick={() => setShowCancelModal(false)}>Close</button>
                 </div>
             </div>
@@ -245,8 +267,8 @@ const OrderHistory = () => {
                             <option value="Shipped">Shipped</option>
                             <option value="Out for Delivery">Out for Delivery</option>
                             <option value="Delivered">Delivered</option>
-                            <option value="Cancelled Before Delivery">Cancelled Before Delivery</option>
-                            <option value="Cancelled After Delivery">Cancelled After Delivery</option>
+                            <option value="Cancelled Before Delivery">Cancelled</option>
+                            <option value="Cancelled After Delivery">Returned</option>
 
                         </select>
                     </div>
@@ -261,119 +283,127 @@ const OrderHistory = () => {
 
                 {/* Right section for orders */}
                 {hasOrders ? (
-                <div className="orders-section">
-                    {filteredOrders.map((order) => (
-                        <div key={`${order.order_id}-${order.order_item_id}`} className={`order-item ${expandedOrderId === order.order_id ? 'expanded' : ''}`} onClick={() => toggleOrder(order.order_id)}>
-                            <img src={order.product_image} alt={order.product_name} className="product-image" />
-                            <div className="order-details">
-                                <p className="product-name">{order.product_name}</p>
-                                <div className="order-info">
-                                    <span className="order-id"> Order Number: {order.order_id}</span>
-                                    {/* <span className="order-price"> {(order.price + (order.price * TAX_RATE)).toFixed(2)}</span> */}
-                                    <span className="order-price">Total: ${(parseFloat(order.price * order.quantity) + (parseFloat(order.price * order.quantity) * TAX_RATE)).toFixed(2)}</span>
+                    <div className="orders-section">
+                        {filteredOrders.map((order) => (
+                            <div key={`${order.order_id}-${order.order_item_id}`} className={`order-item ${expandedOrderId === order.order_id ? 'expanded' : ''}`} onClick={() => toggleOrder(order.order_id)}>
+                                <img src={order.product_image} alt={order.product_name} className="product-image" />
+                                <div className="order-details">
+                                    <p className="product-name">{order.product_name}</p>
+                                    <div className="order-info">
+                                        <span className="order-id"> Order Number: {order.order_id}</span>
+                                        {/* <span className="order-price"> {(order.price + (order.price * TAX_RATE)).toFixed(2)}</span> */}
+                                        <span className="order-price">Total: ${(parseFloat(order.price * order.quantity) + (parseFloat(order.price * order.quantity) * TAX_RATE)).toFixed(2)}</span>
 
-                                </div>
-                                <div className="status">Quantity: {order.quantity}</div>
-                                <div className="order-info">
-                                    <div className="status">Status: {getStatusMessage(order.status)}</div>
-                                    {!(order.status === 'Cancelled After Delivery' || order.status === 'Cancelled Before Delivery') && (
-                                        <button className="cancel-button-order-history" onClick={() => handleCancelClick(order)}>Cancel Order</button>
+                                    </div>
+                                    <div className="status">Quantity: {order.quantity}</div>
+                                    <div className="order-info">
+                                        <div className="status">Status: {getStatusMessage(order.status)}</div>
+                                        {!(order.status === 'Cancelled After Delivery' || order.status === 'Cancelled Before Delivery') && (
+                                            <>
+                                                {(['Ordered', 'Processed', 'Shipped'].includes(order.status)) && (
+                                                    <button className="cancel-button-order-history" onClick={() => handleCancelClick(order)}>Cancel Order</button>
+                                                )}
+
+                                                {(['Out for Delivery', 'Delivered'].includes(order.status)) && (
+                                                    <button className="cancel-button-order-history" onClick={() => handleCancelClick(order)}>Return Order</button>
+                                                )}
+                                            </>
+                                        )}
+                                    </div>
+                                    {(order.status === 'Cancelled After Delivery' || order.status === 'Cancelled Before Delivery') ? '' : (
+                                        <div className="progress-container">
+                                            <div className="progress-bar">
+                                                <div className="progress-bar-completed" style={{ width: `${getProgressPercentage(order.status)}%` }}></div>
+                                            </div>
+                                            <div className="progress-stages">
+                                                <div className="progress-stage left">Ordered</div>
+                                                <div className="progress-stage">Processed</div>
+                                                <div className="progress-stage">Shipped</div>
+                                                <div className="progress-stage">Out for Delivery</div>
+                                                <div className="progress-stage right">Delivered</div>
+                                            </div>
+                                        </div>)}
+                                    {expandedOrderId === order.order_id && (
+                                        <>
+                                            {order.status === 'Cancelled After Delivery' ? (
+                                                <>
+                                                    <div className="progress-container">
+                                                        <div className="progress-bar">
+                                                            <div className="progress-bar-completed" style={{ width: `${getProgressPercentage(order.cancelled_status)}%` }}></div>
+                                                        </div>
+                                                        <div className="progress-stages">
+                                                            <div className="progress-stage left">Initiated</div>
+                                                            <div className="progress-stage">Picked Up</div>
+                                                            <div className="progress-stage">Received</div>
+                                                            <div className="progress-stage">Refund Issued</div>
+                                                            <div className="progress-stage right">Refund Credited</div>
+                                                        </div>
+                                                    </div>
+                                                    <div className="order-details-flex">
+                                                        <div className="status-details">
+                                                            <p>Initiated</p>
+                                                            <p>Picked Up</p>
+                                                            <p>Received</p>
+                                                            <p>Refund Issued</p>
+                                                            <p>Refund Credited</p>
+                                                        </div>
+                                                        <div className="date-details">
+                                                            <p>{formatDate(order.initiated_date)}</p>
+                                                            <p>{formatDate(order.picked_up_date)}</p>
+                                                            <p>{formatDate(order.received_date)}</p>
+                                                            <p>{formatDate(order.refund_issued_date)}</p>
+                                                            <p>{formatDate(order.refund_credited_date)}</p>
+                                                        </div>
+                                                        <div className="payment-address-details">
+                                                            <div className="payment-details-flex">Tracking Number: {order.order_item_id}</div>
+                                                            <div className="payment-details-flex">Refund will be processed to: {order.card_type} -  {`${order.card_number.slice(0, 4)} **** **** ${order.card_number.slice(-4)}`}</div>
+                                                            <div className="address-details-flex">Pickup Address: {order.address_line}, {order.city}, {order.state}, {order.postal_code}</div>
+                                                            <div className="address-details-flex">Refund Total: ${(parseFloat(order.price * order.quantity) + (parseFloat(order.price * order.quantity) * TAX_RATE)).toFixed(2)}</div>
+                                                        </div>
+                                                    </div>
+                                                </>
+                                            ) : order.status === 'Cancelled Before Delivery' ? (
+                                                <>
+                                                    <div className="payment-details-flex">Refund has been credited, it will reflect in your payment method 2-3 business days</div>
+                                                    <div className="payment-details-flex">Tracking Number: {order.order_item_id}</div>
+                                                    <div className="payment-details-flex">Refund is processed to: {order.card_type} -  {`${order.card_number.slice(0, 4)} **** **** ${order.card_number.slice(-4)}`}</div>
+                                                    <div className="address-details-flex">Refund Total: ${(parseFloat(order.price * order.quantity) + (parseFloat(order.price * order.quantity) * TAX_RATE)).toFixed(2)}</div>
+                                                </>
+                                            ) :
+                                                (
+                                                    <div className="order-details-flex">
+                                                        <div className="status-details">
+                                                            <p>Ordered</p>
+                                                            <p>Processed</p>
+                                                            <p>Shipped</p>
+                                                            <p>Out for Delivery</p>
+                                                            <p>Delivered</p>
+                                                        </div>
+                                                        <div className="date-details">
+                                                            <p>{formatDate(order.order_date)}</p>
+                                                            <p>{formatDate(order.processed_date)}</p>
+                                                            <p>{formatDate(order.shipped_date)}</p>
+                                                            <p>{formatDate(order.out_for_delivery_date)}</p>
+                                                            <p>{formatDate(order.delivered_date)}</p>
+                                                        </div>
+                                                        <div className="payment-address-details">
+                                                            <div className="payment-details-flex">Tracking Number: {order.order_item_id}</div>
+                                                            <div className="payment-details-flex">Payment: {order.card_type} -  {`${order.card_number.slice(0, 4)} **** **** ${order.card_number.slice(-4)}`}</div>
+                                                            <div className="address-details-flex">Shipping Address: {order.address_line}, {order.city}, {order.state}, {order.postal_code}</div>
+                                                            <div className="address-details-flex">Order Total: {order.total_price}</div>
+                                                        </div>
+                                                    </div>
+                                                )}
+                                        </>
                                     )}
-                                </div>
-                                {(order.status === 'Cancelled After Delivery' || order.status === 'Cancelled Before Delivery') ? '' : (
-                                    <div className="progress-container">
-                                        <div className="progress-bar">
-                                            <div className="progress-bar-completed" style={{ width: `${getProgressPercentage(order.status)}%` }}></div>
-                                        </div>
-                                        <div className="progress-stages">
-                                            <div className="progress-stage left">Ordered</div>
-                                            <div className="progress-stage">Processed</div>
-                                            <div className="progress-stage">Shipped</div>
-                                            <div className="progress-stage">Out for Delivery</div>
-                                            <div className="progress-stage right">Delivered</div>
-                                        </div>
-                                    </div>)}
-                                {expandedOrderId === order.order_id && (
-                                    <>
-                                        {order.status === 'Cancelled After Delivery' ? (
-                                            <>
-                                                <div className="progress-container">
-                                                    <div className="progress-bar">
-                                                        <div className="progress-bar-completed" style={{ width: `${getProgressPercentage(order.cancelled_status)}%` }}></div>
-                                                    </div>
-                                                    <div className="progress-stages">
-                                                        <div className="progress-stage left">Initiated</div>
-                                                        <div className="progress-stage">Picked Up</div>
-                                                        <div className="progress-stage">Received</div>
-                                                        <div className="progress-stage">Refund Issued</div>
-                                                        <div className="progress-stage right">Refund Credited</div>
-                                                    </div>
-                                                </div>
-                                                <div className="order-details-flex">
-                                                    <div className="status-details">
-                                                        <p>Initiated</p>
-                                                        <p>Picked Up</p>
-                                                        <p>Received</p>
-                                                        <p>Refund Issued</p>
-                                                        <p>Refund Credited</p>
-                                                    </div>
-                                                    <div className="date-details">
-                                                        <p>{formatDate(order.initiated_date)}</p>
-                                                        <p>{formatDate(order.picked_up_date)}</p>
-                                                        <p>{formatDate(order.received_date)}</p>
-                                                        <p>{formatDate(order.refund_issued_date)}</p>
-                                                        <p>{formatDate(order.refund_credited_date)}</p>
-                                                    </div>
-                                                    <div className="payment-address-details">
-                                                        <div className="payment-details-flex">Tracking Number: {order.order_item_id}</div>
-                                                        <div className="payment-details-flex">Refund will be processed: {order.card_type} -  {`${order.card_number.slice(0, 4)} **** **** ${order.card_number.slice(-4)}`}</div>
-                                                        <div className="address-details-flex">Pickup Address: {order.address_line}, {order.city}, {order.state}, {order.postal_code}</div>
-                                                        <div className="address-details-flex">Refund Total: ${(parseFloat(order.price * order.quantity) + (parseFloat(order.price * order.quantity) * TAX_RATE)).toFixed(2)}</div>
-                                                    </div>
-                                                </div>
-                                            </>
-                                        ) : order.status === 'Cancelled Before Delivery' ? (
-                                            <>
-                                                <div className="payment-details-flex">Refund has been credited, it will reflect in your payment method 2-3 business days</div>
-                                                <div className="payment-details-flex">Tracking Number: {order.order_item_id}</div>
-                                                <div className="payment-details-flex">Refund is processed to: {order.card_type} -  {`${order.card_number.slice(0, 4)} **** **** ${order.card_number.slice(-4)}`}</div>
-                                                <div className="address-details-flex">Refund Total: ${(parseFloat(order.price * order.quantity) + (parseFloat(order.price * order.quantity) * TAX_RATE)).toFixed(2)}</div>
-                                            </>
-                                        ) :
-                                            (
-                                                <div className="order-details-flex">
-                                                    <div className="status-details">
-                                                        <p>Ordered</p>
-                                                        <p>Processed</p>
-                                                        <p>Shipped</p>
-                                                        <p>Out for Delivery</p>
-                                                        <p>Delivered</p>
-                                                    </div>
-                                                    <div className="date-details">
-                                                        <p>{formatDate(order.order_date)}</p>
-                                                        <p>{formatDate(order.processed_date)}</p>
-                                                        <p>{formatDate(order.shipped_date)}</p>
-                                                        <p>{formatDate(order.out_for_delivery_date)}</p>
-                                                        <p>{formatDate(order.delivered_date)}</p>
-                                                    </div>
-                                                    <div className="payment-address-details">
-                                                        <div className="payment-details-flex">Tracking Number: {order.order_item_id}</div>
-                                                        <div className="payment-details-flex">Payment: {order.card_type} -  {`${order.card_number.slice(0, 4)} **** **** ${order.card_number.slice(-4)}`}</div>
-                                                        <div className="address-details-flex">Shipping Address: {order.address_line}, {order.city}, {order.state}, {order.postal_code}</div>
-                                                        <div className="address-details-flex">Order Total: {order.total_price}</div>
-                                                    </div>
-                                                </div>
-                                            )}
-                                    </>
-                                )}
 
+                                </div>
                             </div>
-                        </div>
-                    ))}
-                </div>)
-                :(
-                    <div className="no-orders"><img src={noordersUrl} alt="No products found" /></div>
-                )}
+                        ))}
+                    </div>)
+                    : (
+                        <div className="no-orders"><img src={noordersUrl} alt="No products found" /></div>
+                    )}
             </div>
             {/* Modal for canceling order */}
             {showCancelModal && <CancelOrderModal />}

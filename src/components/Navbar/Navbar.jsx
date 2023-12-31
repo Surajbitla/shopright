@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link, useNavigate  } from 'react-router-dom'; 
+import { Link, useNavigate } from 'react-router-dom';
 import "./Navbar.css";
 import UserContext from '../../UserContext';
 import { useCart } from '../../components/ShoppingCart/CartContext';
@@ -25,10 +25,10 @@ const Navbar = () => {
     setUser(null);        // Clear the user state
     setIsLoggedIn(false); // Update the isLoggedIn state
     sessionStorage.setItem('userEmail', "");
-    sessionStorage.setItem('user','');
+    sessionStorage.setItem('user', '');
     navigate('/home');
     window.location.reload();
-};
+  };
   // Get the total items count
   const totalItems = getTotalItems(cart);
 
@@ -37,7 +37,9 @@ const Navbar = () => {
       <div className="main-page">
         <nav id="navbar">
           <h1 className="logo">
-            Shop<span>Right</span>
+            <Link to="/home" style={{ textDecoration: 'none', color: 'inherit' }}>
+              Shop<span>Right</span>
+            </Link>
           </h1>
 
           <ul>
@@ -48,16 +50,16 @@ const Navbar = () => {
               <Link to="/products">Products</Link>
             </li>
             {localUserData ? (
-            <li onMouseEnter={toggleDropdown} onMouseLeave={toggleDropdown}>
-            <Link to="#">Profile</Link>
-              {showDropdown && (
-                <div className="dropdown-menu">
-                  <Link to="/profile">My Account</Link>
-                  <Link to="/order-history">Order History</Link>
-                  <Link to="/change-password">Change Password</Link>
-                  <Link to="#" onClick={handleLogout}>Logout</Link>
-                </div>
-              )}
+              <li onMouseEnter={toggleDropdown} onMouseLeave={toggleDropdown}>
+                <Link to="#">Profile</Link>
+                {showDropdown && (
+                  <div className="dropdown-menu">
+                    <Link to="/profile">My Account</Link>
+                    <Link to="/order-history">Order History</Link>
+                    <Link to="/change-password">Change Password</Link>
+                    <Link to="#" onClick={handleLogout}>Logout</Link>
+                  </div>
+                )}
               </li>
             ) : (
               <li>

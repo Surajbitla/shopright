@@ -54,6 +54,7 @@
     border-radius: 5px;
     max-width: 100%;
     max-height: 300px;
+    font-family: 'sans-serif';
   }
   
   .customer-service-container .email-form button {
