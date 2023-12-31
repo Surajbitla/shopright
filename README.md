@@ -21,6 +21,8 @@ Before you begin, ensure you have met the following requirements:
 - **Git**: For cloning and version control.
 - **MySQL**: For the database.
 - **Any text editor or IDE**: Preferably VSCode.
+- An email account for sending temporary passwords (setup with Brevo)
+
 
 ### Installation and Setup
 
@@ -60,7 +62,25 @@ Before you begin, ensure you have met the following requirements:
    node server.js
    ```
    This will also establish a connection to the database.
-   
+
+
+#### Email Configuration for Temporary Passwords
+1. Sign up or log in to https://app.brevo.com/.
+2. Navigate to SMTP & API and click "Generate a new SMTP Key".
+3. Copy the generated key.
+4. In your project, open `server.js` or the relevant file where the nodemailer transport is set up.
+5. Replace the `user` value with your email and `pass` value with the copied SMTP key:
+   ```javascript
+   const transporter = nodemailer.createTransport({
+       host: "smtp-relay.brevo.com",
+       port: 587,
+       secure: false,
+       auth: {
+           user: "mygamil@gmail.com",
+           pass: "xsmtpsib-your-copied-key"
+       }
+   });
+   ```
 
 #### Database Configuration
 Before running the `server.js`, you need to set up your database connection. The default connection settings are as follows:
