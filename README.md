@@ -111,6 +111,9 @@ const connection = mysql.createConnection({
 1. Ensure MySQL is installed and running on your system.
 2. Run the provided script files located in the `shopright-backend` repository to set up the database schema.
 
+
+#### Database Design
+![Database Design](https://github.com/Surajbitla/shopright/assets/135169955/e8659021-0292-4a9c-8b74-6e4709615145)
 ## Features
 - Detailed product catalog
 - User-friendly shopping cart and checkout process
