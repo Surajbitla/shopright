@@ -52,9 +52,7 @@ function ChangePassword() {
                 newPassword
             });
     
-            console.log('Response from server:', response.data);
             if (response.data.success) {
-                console.log('Password changed successfully');
                 setError(''); 
                 setSuccessMessage('Password changed successfully! Redirecting to home...');
                 
@@ -66,10 +64,8 @@ function ChangePassword() {
                 setError(response.data.message);
             }
         } catch (error) {
-            console.error('Error changing password:', error);
             setError("Error during password change. Please try again later.");
         }
-        console.log('Password changed successfully');
     };
 
     return (

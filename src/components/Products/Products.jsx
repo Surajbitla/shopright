@@ -70,7 +70,8 @@ function Products() {
   };
   
 
-  const topProducts = productData.slice(0, 4); // Assuming you want to rotate through the first 4 products
+  // Assuming you want to rotate through the first 4 products (reserved for future use)
+  // const topProducts = productData.slice(0, 4);
 
   return (
     <>

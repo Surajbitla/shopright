@@ -10,9 +10,6 @@ function LoginPage() {
     const navigate = useNavigate();
     const apiUrl = process.env.NODE_ENV === 'development' ? config.development.apiUrl : config.production.apiUrl;
 
-    console.log(config); // Log the entire config object
-    console.log(config[process.env.NODE_ENV].apiUrl); // Log the apiUrl property
-
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [errorMessageLogin, setErrorMessageLogin] = useState("");
     const { setUser, setIsLoggedIn } = useContext(UserContext);
@@ -33,7 +30,7 @@ function LoginPage() {
 
 
                 } else {
-                    console.error('No user object in response');
+                    // No user object in response
                 }
                 setIsLoggedIn(true);
                 sessionStorage.setItem('userEmail', email);
@@ -44,7 +41,6 @@ function LoginPage() {
                 }
             }
         } catch (error) {
-            console.error('Error during login:', error);
             if (error.response && error.response.data) {
                 // If the server sent a specific error message, use that
                 setErrorMessageLogin(error.response.data);

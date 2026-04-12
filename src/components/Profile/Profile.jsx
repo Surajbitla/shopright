@@ -1,5 +1,5 @@
-import React, { useState, useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom'; 
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom'; 
 import './Profile.css';
 import Navbar from "../Navbar/Navbar";
 import MyDetails from './MyDetails'; // Import your component

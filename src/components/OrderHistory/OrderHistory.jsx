@@ -113,12 +113,12 @@ const OrderHistory = () => {
                 setOrders(response.data);
                 setFilteredOrders(response.data); // initially, filteredOrders is the same as orders
             } catch (error) {
-                console.error('Error fetching orders:', error);
                 // Handle error appropriately
             }
         };
 
         fetchOrders();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const [showCancelModal, setShowCancelModal] = useState(false);
@@ -128,7 +128,6 @@ const OrderHistory = () => {
 
     const handleCancelClick = (order) => {
         setSelectedOrderForCancellation(order);
-        console.log(order);
         setShowCancelModal(true);
         setCancelReason('');
         setCustomCancelReason('');
@@ -143,7 +142,7 @@ const OrderHistory = () => {
             setShowCancelModal(false);
             window.location.reload();
         } catch (error) {
-            console.error('Error cancelling order item:', error);
+            // Handle error
         }
     };
 

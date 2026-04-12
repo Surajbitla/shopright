@@ -34,7 +34,6 @@ const Checkout = () => {
             await axios.put(`${apiUrl}/addresses/${address.address_id}/set-primary`);
             // Fetch updated addresses again if necessary
         } catch (error) {
-            console.error('Error updating primary address:', error);
         }
     };
 
@@ -48,7 +47,6 @@ const Checkout = () => {
             await axios.put(`${apiUrl}/payments/${payment.payment_id}/set-default`);
             // Fetch updated payments again if necessary
         } catch (error) {
-            console.error('Error updating default payment:', error);
         }
     };
 
@@ -61,7 +59,6 @@ const Checkout = () => {
             setDefaultAddress(response.data.find(addr => addr.is_primary));
             // ... set other addresses if needed
         } catch (error) {
-            console.error('Error fetching addresses:', error);
         }
     };
 
@@ -71,7 +68,6 @@ const Checkout = () => {
             setDefaultPayment(response.data.find(pm => pm.is_default));
             // ... set other payments if needed
         } catch (error) {
-            console.error('Error fetching payments:', error);
         }
     };
 
@@ -99,7 +95,6 @@ const Checkout = () => {
             setShowSuccessModal(true);
             // Handle successful order placement
         } catch (error) {
-            console.error('Error placing order:', error);
             // Handle error
         }
     };
@@ -164,6 +159,7 @@ const Checkout = () => {
         } else {
             // Handle non-logged-in user scenario
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const SuccessModal = () => {

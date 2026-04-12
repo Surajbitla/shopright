@@ -74,14 +74,11 @@ function Signup() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const { firstName, lastName, email, phoneNumber } = formData;
-        console.log(email);
         try {
-            const response = await axios.post(`${apiUrl}/signup`, { firstName, lastName, email, phoneNumber });
-            console.log('Signup response:', response.data);
+            await axios.post(`${apiUrl}/signup`, { firstName, lastName, email, phoneNumber });
             navigate('/email-notification');  // Use navigate instead of history.push
 
-          } catch (error) {            
-            console.error('Error signing up:', error);
+          } catch (error) {
             // Check if the error is due to a 409 response
             if (error.response && error.response.status === 409) {
                 setErrorMessageSignup('User already registered.');

@@ -7,9 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 
 const Navbar = () => {
-  const { isLoggedIn } = useContext(UserContext);
   const { cart } = useCart(); // use the useCart hook
-  const userEmail = sessionStorage.getItem('userEmail');
   const localUserData = sessionStorage.getItem('user');
   const [showDropdown, setShowDropdown] = useState(false);
   const { setUser, setIsLoggedIn } = useContext(UserContext);

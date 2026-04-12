@@ -32,15 +32,14 @@ const MyAddresses = ({ onSelectAddress, isCheckout }) => {
     fetchAddresses(userId);
     }
     
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fetchAddresses = async (userId) => {
     try {
       const response = await axios.get(`${apiUrl}/addresses/${userId}`);
       setAddresses(response.data);
-      console.log(response.data);
     } catch (error) {
-      console.error('Error fetching addresses:', error);
     }
   };
   
@@ -73,7 +72,6 @@ const MyAddresses = ({ onSelectAddress, isCheckout }) => {
         setNewAddress({ addressLine: '', city: '', state: '', postalCode: '', isPrimary: false });
         setShowForm(false);
       } catch (error) {
-        console.error('Error adding new address:', error);
       }
     }
   };
@@ -87,7 +85,6 @@ const MyAddresses = ({ onSelectAddress, isCheckout }) => {
         await axios.delete(`${apiUrl}/addresses/${addressId}`);
         fetchAddresses(userId); // Refresh the addresses list
       } catch (error) {
-        console.error('Error removing address:', error);
       }
     };
 
@@ -98,7 +95,6 @@ const MyAddresses = ({ onSelectAddress, isCheckout }) => {
         await axios.put(`${apiUrl}/addresses/${addressId}/set-primary`, { userId });
         fetchAddresses(userId); // Refresh the addresses list
       } catch (error) {
-        console.error('Error setting primary address:', error);
       }
     };
     
@@ -120,10 +116,10 @@ const MyAddresses = ({ onSelectAddress, isCheckout }) => {
               <div className="address-details">
                 <p className="address-line">{address.address_line}</p>
                 <p className="address-info">{`${address.city}, ${address.state} ${address.postal_code}`}</p>
-                {(address.is_primary!=0) && <p className="primary-address">Primary Address</p>}
+                {(address.is_primary !== 0) && <p className="primary-address">Primary Address</p>}
               </div>
               <div className="address-actions">
-                {!isCheckout && !(address.is_primary!=0) && (
+                {!isCheckout && !(address.is_primary !== 0) && (
                   <button
                     className="set-primary-button"
                     onClick={() => setPrimaryAddress(address.address_id)}

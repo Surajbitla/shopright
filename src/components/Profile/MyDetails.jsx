@@ -38,7 +38,6 @@ const MyDetails = () => {
     // Load user data from local storage on component mount
     useEffect(() => {
         const storedUserData = JSON.parse(sessionStorage.getItem('user'));
-        console.log(storedUserData);
         if (storedUserData) {
             setUserData(storedUserData);
             setEditableFields({

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './ForgotPassword.css';
 import Navbar from "../Navbar/Navbar";
-import { Link, useNavigate  } from 'react-router-dom'; 
+import { useNavigate  } from 'react-router-dom'; 
 import axios from 'axios';
 import config from '../../config';
 
@@ -39,14 +39,11 @@ function ForgotPassword() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const { email } = formData;
-        console.log(email);
         try {
-            const response = await axios.post(`${apiUrl}/forgot-password`, { email });
-            console.log('Forgot password response:', response.data);
+            await axios.post(`${apiUrl}/forgot-password`, { email });
             navigate('/email-notification'); 
     
         } catch (error) {
-            console.error('Error in password reset:', error);
         }
     };
     

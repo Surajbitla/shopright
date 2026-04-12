@@ -26,6 +26,7 @@ const Admin = () => {
         axios.get(`${apiUrl}/api/users`).then(response => {
             setUsers(response.data);
         });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const handleUserChange = (e) => {
@@ -70,7 +71,6 @@ const Admin = () => {
             // Additional logic to refresh the list or UI elements
         }).catch(err => {
             alert('Error updating order item');
-            console.error(err);
         });
     };
 

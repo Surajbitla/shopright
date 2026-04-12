@@ -55,7 +55,6 @@ function ProductDetails() {
 
   const checkDeliveryAvailability = () => {
     // Logic to check delivery availability
-    console.log('Checking delivery for pincode:', deliveryPincode);
     // This would typically involve setting some state or alerting the user
   };
   const handleAddToCartClick = () => {

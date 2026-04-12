@@ -1,18 +1,9 @@
-import React , { useState } from "react";
+import React from "react";
 import Navbar from "../Navbar/Navbar";
 import { Link } from "react-router-dom";
 import "./Home.css";
 
-const contents = {
-  // Sample contents, you can replace these with your actual data
-  "Content1": { img: '../../assets/images/content1.jpg', text: 'Description for Content1' },
-  "Content2": { img: '../../assets/images/content2.jpg', text: 'Description for Content2' },
-  // ... add more contents as needed
-};
-
 const Home = () => {
-  const [selectedContent, setSelectedContent] = useState(Object.keys(contents)[0]);
-
   return (
     <>
       <Navbar />
