@@ -1,7 +1,6 @@
 import React from 'react';
 import './EmailNotification.css';  // Assuming you keep styles in a separate CSS file
 import { Link } from 'react-router-dom';
-import gmailIcon from '../../Assets/images/Gmail-Logo.png';  // Adjust the path accordingly
 
 
 function EmailNotification() {

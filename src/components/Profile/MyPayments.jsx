@@ -33,6 +33,7 @@ const MyPayments = ({ onSelectPayment, isCheckout }) => {
       const userId = storedUserData.id;
       fetchPayments(userId);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
 
@@ -40,9 +41,7 @@ const MyPayments = ({ onSelectPayment, isCheckout }) => {
     try {
       const response = await axios.get(`${apiUrl}/payments/${userId}`);
       setPayments(response.data);
-      console.log(response.data);
     } catch (error) {
-      console.error('Error fetching payments:', error);
     }
   };
 
@@ -54,7 +53,6 @@ const MyPayments = ({ onSelectPayment, isCheckout }) => {
       await axios.put(`${apiUrl}/payments/${paymentId}/set-default`, { userId });
       fetchPayments(userId); // Refresh the payment methods list
     } catch (error) {
-      console.error('Error setting default payment:', error);
     }
   };
 
@@ -98,7 +96,6 @@ const MyPayments = ({ onSelectPayment, isCheckout }) => {
       await axios.delete(`${apiUrl}/payments/${paymentId}`);
       fetchPayments(userId); // Refresh the payment methods list
     } catch (error) {
-      console.error('Error removing payment:', error);
     }
   };
 
@@ -138,7 +135,6 @@ const MyPayments = ({ onSelectPayment, isCheckout }) => {
       setValidationErrors({ cardNumber: '', cvv: '', expiryDate: '' });
       setShowForm(false);
     } catch (error) {
-      console.error('Error adding new payment:', error);
     }
   };
 
@@ -167,10 +163,10 @@ const MyPayments = ({ onSelectPayment, isCheckout }) => {
                   {`${payment.card_number?.slice(0, 4) || '****'} **** **** ${payment.card_number?.slice(-4) || '****'}`}
                 </p>
                 <p className="payment-card-type">{payment.card_type}</p>
-                {(payment.is_default != 0) && <p className="default-payment">Default</p>}
+                {(payment.is_default !== 0) && <p className="default-payment">Default</p>}
               </div>
               <div className="payment-actions">
-                {!isCheckout && !(payment.is_default != 0) && (
+                {!isCheckout && !(payment.is_default !== 0) && (
                   <button
                     className="set-default-button"
                     onClick={() => setDefaultPayment(payment.payment_id)}

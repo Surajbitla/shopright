@@ -247,7 +247,7 @@ body, input, button, select {
 
 .order-details-flex {
   display: flex;
-  align-items: start; /* Align items to the top */
+  align-items: flex-start; /* Align items to the top */
   padding: 10px;
   background-color: #f9f9f9;
   border-radius: 8px;

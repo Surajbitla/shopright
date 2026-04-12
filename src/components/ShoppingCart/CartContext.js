@@ -9,8 +9,7 @@ export const useCart = () => useContext(CartContext);
 
 export const CartProvider = ({ children }) => {
     const [cart, setCart] = useState([]);
-    const userEmail = sessionStorage.getItem('userEmail');
-    const { user, isLoggedIn, setUser ,setIsLoggedIn} = useContext(UserContext); // Now also getting isLoggedIn from context
+    const { user, isLoggedIn } = useContext(UserContext); // Now also getting isLoggedIn from context
     const TAX_RATE = 0.10; // 10% tax rate, adjust as needed
     const totalPrice = cart.reduce((acc, curr) => acc + curr.price * curr.quantity, 0);
 
@@ -19,7 +18,6 @@ export const CartProvider = ({ children }) => {
 
     // Calculate total price including tax
     const totalIncludingTax = totalPrice + tax;
-    console.log(user);
     const apiUrl = process.env.NODE_ENV === 'development' ? config.development.apiUrl : config.production.apiUrl;
 
     const saveCartToLocal = (cart) => {
@@ -31,22 +29,17 @@ export const CartProvider = ({ children }) => {
             // headers: { Authorization: `Bearer ${user.token}` }, 
           });
           setCart(response.data);
-          console.log('fetch DB call');
-          console.log(response.data);
         } catch (error) {
-          console.error('Error fetching cart from DB:', error);
           // Handle error, e.g., by setting some state
         }
       };
 
       const saveCartToDB = async (userId, cart) => {
-        console.log(cart);
         try {
           await axios.put(`${apiUrl}/cart/${userId}`, cart, {
             // headers: { Authorization: `Bearer ${user.token}` },
           });
         } catch (error) {
-          console.error('Error saving cart to DB:', error);
           // Handle error, e.g., by setting some state
         }
       };
@@ -72,12 +65,9 @@ const addToCart = (product, quantity) => {
       // Save updated cart to local storage immediately
       if (localUserData) {
         const userData = JSON.parse(localUserData);
-        console.log('add DB');
         saveCartToDB(userData.id, updatedCart);
       } else {
         saveCartToLocal(updatedCart);
-        console.log('add local');
-        console.log(userEmail,isLoggedIn);
       }
       return updatedCart;
     });
@@ -93,10 +83,8 @@ const addToCart = (product, quantity) => {
       // Save updated cart to local storage immediately
       if (localUserData) {
         const userData = JSON.parse(localUserData);
-        console.log('remove DB');
         saveCartToDB(userData.id, updatedCart);
       } else {
-        console.log('remove local');
         saveCartToLocal(updatedCart);
       }
       return updatedCart;
@@ -122,10 +110,8 @@ const addToCart = (product, quantity) => {
       // Save updated cart to local storage immediately
       if (localUserData) {
         const userData = JSON.parse(localUserData);
-        console.log('uodate DB');
         saveCartToDB(userData.id, updatedCart);
       } else {
-        console.log('update local');
         saveCartToLocal(updatedCart);
       }
       return updatedCart;
@@ -145,15 +131,12 @@ useEffect(() => {
   // }
     if (localUserData) {
       const userData = JSON.parse(localUserData);
-      console.log(userData);
-      console.log(userData.id)
       fetchCartFromDB(userData.id);
-      console.log('DB effect');
     } else {
-      console.log('local effect');
       const localData = sessionStorage.getItem('cart');
       setCart(localData ? JSON.parse(localData) : []);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, isLoggedIn]);
   
 
@@ -164,10 +147,8 @@ useEffect(() => {
       // Save updated cart to local storage immediately
       if (localUserData) {
         const userData = JSON.parse(localUserData);
-        console.log('uodate DB');
         saveCartToDB(userData.id, []);
       } else {
-        console.log('update local');
         saveCartToLocal([]);
       }
       return [];
@@ -175,8 +156,7 @@ useEffect(() => {
 
   const applyCoupon = (couponCode) => {
     // Define coupon application logic here
-    console.log(`Applying coupon: ${couponCode}`);
-    // For now, it's just a placeholder
+    // Placeholder for coupon application
   };
 
   return (
