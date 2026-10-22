@@ -6,17 +6,17 @@ const Error = () => {
   return (
     <>
       <div className="error-page">
-        <div class="error">404</div>
+        <div className="error">404</div>
         <br />
         <br />
-        <span class="info">File not found</span>
+        <span className="info">File not found</span>
         <img
-          src="http://images2.layoutsparks.com/1/160030/too-much-tv-static.gif"
-          class="static"
+          src="/images/nodatafound.png"
+          className="static"
           alt="404-error"
         />
         <div className="home-button">
-          <Link to="/Home">Go To Home</Link>
+          <Link to="/home">Go To Home</Link>
         </div>
       </div>
     </>
